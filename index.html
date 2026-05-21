@@ -113,6 +113,24 @@
     }
     .logo { display:flex; align-items:center; gap:.55rem; font-size:.9rem; font-weight:500; color:var(--on-surface); }
     .logo-dot { color: var(--primary); }
+    /* ── Language switcher ── */
+    .lang-switcher {
+      display:flex; align-items:center;
+      background:var(--surface-container);
+      border:1px solid var(--outline-variant);
+      border-radius:var(--shape-full);
+      padding:.18rem .25rem; margin-left:.75rem; gap:.05rem;
+    }
+    .lang-btn {
+      background:none; border:none; cursor:pointer;
+      font-family:var(--mono); font-size:.72rem; font-weight:500;
+      letter-spacing:.06em; color:var(--on-surface-variant);
+      padding:.22rem .55rem; border-radius:var(--shape-full);
+      transition:background .15s, color .15s;
+    }
+    .lang-btn.active  { background:var(--primary); color:var(--on-primary); }
+    .lang-btn:hover:not(.active) { background:var(--state-hover-primary); color:var(--on-surface); }
+
     .nav-links { display:flex; gap:.2rem; list-style:none; align-items:center; }
     .nav-link {
       font-size:.875rem; font-weight:400; color:var(--on-surface-variant);
@@ -409,12 +427,16 @@
       Michał Kuś<span class="logo-dot">.</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#services"     class="nav-link">Usługi</a></li>
-      <li><a href="#approach"     class="nav-link">Podejście</a></li>
-      <li><a href="#experience"   class="nav-link">Doświadczenie</a></li>
-      <li><a href="#testimonials" class="nav-link">Rekomendacje</a></li>
-      <li><a href="#contact"      class="nav-link nav-cta">Porozmawiajmy</a></li>
+      <li><a href="#services"     class="nav-link" data-i18n="nav.services">Usługi</a></li>
+      <li><a href="#approach"     class="nav-link" data-i18n="nav.approach">Podejście</a></li>
+      <li><a href="#experience"   class="nav-link" data-i18n="nav.experience">Doświadczenie</a></li>
+      <li><a href="#testimonials" class="nav-link" data-i18n="nav.testimonials">Rekomendacje</a></li>
+      <li><a href="#contact"      class="nav-link nav-cta" data-i18n="nav.cta">Porozmawiajmy</a></li>
     </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pl" onclick="setLanguage('pl')">PL</button>
+      <button class="lang-btn"        data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
   </div>
 </nav>
 
@@ -424,27 +446,27 @@
   <div class="blob-bl"></div>
   <div class="grid-lines"></div>
   <div class="container hero-content">
-    <div class="chip hero-chip">Product Manager · Discovery · AI · Process</div>
-    <h1>Od problemu klienta<br>do produktu, który <strong>działa</strong>.</h1>
-    <p class="hero-sub">
+    <div class="chip hero-chip" data-i18n="hero.chip">Product Manager · Discovery · AI · Process</div>
+    <h1 data-i18n-html="hero.h1">Od problemu klienta<br>do produktu, który <strong>działa</strong>.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">
       Łączę strukturalne product discovery, analizę i usprawnianie procesów
       z doświadczeniem w AI i Computer Vision — żeby budować produkty,
       które odpowiadają na rzeczywiste potrzeby, a nie założenia.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-filled">
-        Umów konsultację
+        <span data-i18n="hero.cta">Umów konsultację</span>
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <a href="#services"  class="btn btn-outlined">Zobacz usługi</a>
+      <a href="#services"  class="btn btn-outlined" data-i18n="hero.services">Zobacz usługi</a>
       <a href="https://www.linkedin.com/in/michaelkus/" target="_blank" class="btn btn-tonal">LinkedIn ↗</a>
     </div>
     <div class="hero-stats">
-      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">lat w product management</div></div>
-      <div class="stat-card"><div class="stat-num">70+</div><div class="stat-label">osób w zarządzanym zespole</div></div>
-      <div class="stat-card"><div class="stat-num">PSPO&nbsp;I</div><div class="stat-label">certyfikat Scrum.org</div></div>
+      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label" data-i18n="hero.stat1">lat w product management</div></div>
+      <div class="stat-card"><div class="stat-num">70+</div><div class="stat-label" data-i18n="hero.stat2">osób w zarządzanym zespole</div></div>
+      <div class="stat-card"><div class="stat-num">PSPO&nbsp;I</div><div class="stat-label" data-i18n="hero.stat3">certyfikat Scrum.org</div></div>
     </div>
   </div>
 </section>
@@ -479,40 +501,40 @@
 <section class="services" id="services">
   <div class="container">
     <div class="section-header reveal">
-      <div class="chip chip-tonal">Czym się zajmuję</div>
-      <h2>Usługi dla firm, które chcą<br>budować właściwe produkty.</h2>
-      <p>Nie tylko szybko — ale w oparciu o realne problemy klientów i sprawne procesy wytwórcze.</p>
+      <div class="chip chip-tonal" data-i18n="svc.chip">Czym się zajmuję</div>
+      <h2 data-i18n-html="svc.h2">Usługi dla firm, które chcą<br>budować właściwe produkty.</h2>
+      <p data-i18n="svc.sub">Nie tylko szybko — ale w oparciu o realne problemy klientów i sprawne procesy wytwórcze.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal d1">
         <div class="svc-icon">🔍</div>
-        <h3>Product Discovery</h3>
-        <p>Strukturalne odkrywanie problemów wartych rozwiązania — zanim zespół napisze pierwszą linię kodu. Wywiady, obserwacje, testowanie założeń w terenie.</p>
+        <h3 data-i18n="s1.title">Product Discovery</h3>
+        <p data-i18n="s1.desc">Strukturalne odkrywanie problemów wartych rozwiązania — zanim zespół napisze pierwszą linię kodu. Wywiady, obserwacje, testowanie założeń w terenie.</p>
       </div>
       <div class="service-card reveal d2">
         <div class="svc-icon">🔄</div>
-        <h3>Analiza i usprawnianie procesów</h3>
-        <p>Mapuję procesy biznesowe i produktowe, identyfikuję wąskie gardła oraz zbędne etapy, a następnie projektuję sprawniejsze przepływy oparte na danych.</p>
+        <h3 data-i18n="s2.title">Analiza i usprawnianie procesów</h3>
+        <p data-i18n="s2.desc">Mapuję procesy biznesowe i produktowe, identyfikuję wąskie gardła oraz zbędne etapy, a następnie projektuję sprawniejsze przepływy oparte na danych.</p>
       </div>
       <div class="service-card reveal d3">
         <div class="svc-icon">🎯</div>
-        <h3>Definiowanie problemów klientów</h3>
-        <p>Przekształcam rozmyte potrzeby i skargi w dobrze zdefiniowane problemy produktowe — precyzyjnie sformułowane, priorytetyzowalne i gotowe do rozwiązania.</p>
+        <h3 data-i18n="s3.title">Definiowanie problemów klientów</h3>
+        <p data-i18n="s3.desc">Przekształcam rozmyte potrzeby i skargi w dobrze zdefiniowane problemy produktowe — precyzyjnie sformułowane, priorytetyzowalne i gotowe do rozwiązania.</p>
       </div>
       <div class="service-card reveal d4">
         <div class="svc-icon">🤖</div>
-        <h3>AI & Computer Vision PM</h3>
-        <p>Product ownership dla produktów AI i CV: modelowanie wartości, partnerstwo z ML i CV, operacjonalizacja modeli w produkcji, rollout z właściwymi progami jakości.</p>
+        <h3 data-i18n="s4.title">AI & Computer Vision PM</h3>
+        <p data-i18n="s4.desc">Product ownership dla produktów AI i CV: modelowanie wartości, partnerstwo z ML i CV, operacjonalizacja modeli w produkcji, rollout z właściwymi progami jakości.</p>
       </div>
       <div class="service-card reveal d5">
         <div class="svc-icon">🗺️</div>
-        <h3>Strategia & Roadmapa</h3>
-        <p>Wizja produktu oparta na danych i priorytetyzacja nakierowana na wartość. Roadmapa, która aliniuje cały zespół — techniczny i biznesowy — wokół wspólnych celów.</p>
+        <h3 data-i18n="s5.title">Strategia & Roadmapa</h3>
+        <p data-i18n="s5.desc">Wizja produktu oparta na danych i priorytetyzacja nakierowana na wartość. Roadmapa, która aliniuje cały zespół — techniczny i biznesowy — wokół wspólnych celów.</p>
       </div>
       <div class="service-card reveal d6">
         <div class="svc-icon">🏢</div>
-        <h3>Platform & Enterprise SaaS</h3>
-        <p>Strategia dla platform: niezawodność, observability, SSO z enterprise identity providers i skalowalność infrastruktury produktowej w środowisku B2B.</p>
+        <h3 data-i18n="s6.title">Platform & Enterprise SaaS</h3>
+        <p data-i18n="s6.desc">Strategia dla platform: niezawodność, observability, SSO z enterprise identity providers i skalowalność infrastruktury produktowej w środowisku B2B.</p>
       </div>
     </div>
   </div>
@@ -522,30 +544,30 @@
 <section class="approach" id="approach">
   <div class="container">
     <div class="section-header reveal">
-      <div class="chip" style="border-color:rgba(26,59,52,.35);color:var(--on-primary-container);">Moje podejście</div>
-      <h2 style="color:var(--on-primary-container);">Discovery → Analiza → Strategia → Iteracja.</h2>
-      <p>Iteracyjny proces, który minimalizuje ryzyko budowania złego produktu.</p>
+      <div class="chip" style="border-color:rgba(26,59,52,.35);color:var(--on-primary-container);" data-i18n="app.chip">Moje podejście</div>
+      <h2 style="color:var(--on-primary-container);" data-i18n="app.h2">Discovery → Analiza → Strategia → Iteracja.</h2>
+      <p data-i18n="app.sub">Iteracyjny proces, który minimalizuje ryzyko budowania złego produktu.</p>
     </div>
     <div class="approach-grid">
       <div class="approach-step reveal d1">
-        <span class="step-num">01 · Diagnoza</span>
-        <h3>Zrozumienie problemu</h3>
-        <p>Wywiady z użytkownikami, analiza danych i obserwacje w terenie. Szukam rzeczywistych problemów — nie tylko tych, o których mówią klienci na pierwszym spotkaniu.</p>
+        <span class="step-num" data-i18n="a1.num">01 · Diagnoza</span>
+        <h3 data-i18n="a1.title">Zrozumienie problemu</h3>
+        <p data-i18n="a1.desc">Wywiady z użytkownikami, analiza danych i obserwacje w terenie. Szukam rzeczywistych problemów — nie tylko tych, o których mówią klienci na pierwszym spotkaniu.</p>
       </div>
       <div class="approach-step reveal d2">
-        <span class="step-num">02 · Analiza</span>
-        <h3>Mapowanie procesów</h3>
-        <p>Wizualizuję aktualne przepływy, mierzę gdzie giną czas i zasoby, identyfikuję bottlenecki — żeby wiedzieć, co poprawić i w jakiej kolejności.</p>
+        <span class="step-num" data-i18n="a2.num">02 · Analiza</span>
+        <h3 data-i18n="a2.title">Mapowanie procesów</h3>
+        <p data-i18n="a2.desc">Wizualizuję aktualne przepływy, mierzę gdzie giną czas i zasoby, identyfikuję bottlenecki — żeby wiedzieć, co poprawić i w jakiej kolejności.</p>
       </div>
       <div class="approach-step reveal d3">
-        <span class="step-num">03 · Strategia</span>
-        <h3>Plan i priorytetyzacja</h3>
-        <p>Definiuję przestrzeń rozwiązania, buduję roadmapę opartą na wartości i alinuję zespół wokół jednego, mierzalnego celu. Nie wycena, a priorytet.</p>
+        <span class="step-num" data-i18n="a3.num">03 · Strategia</span>
+        <h3 data-i18n="a3.title">Plan i priorytetyzacja</h3>
+        <p data-i18n="a3.desc">Definiuję przestrzeń rozwiązania, buduję roadmapę opartą na wartości i alinuję zespół wokół jednego, mierzalnego celu. Nie wycena, a priorytet.</p>
       </div>
       <div class="approach-step reveal d4">
-        <span class="step-num">04 · Iteracja</span>
-        <h3>Budowanie i uczenie się</h3>
-        <p>Dostarczam, mierzę wpływ, uczę się i korektuję kurs. Nie jednorazowy projekt — ciągłe doskonalenie produktu i procesu w oparciu o dane.</p>
+        <span class="step-num" data-i18n="a4.num">04 · Iteracja</span>
+        <h3 data-i18n="a4.title">Budowanie i uczenie się</h3>
+        <p data-i18n="a4.desc">Dostarczam, mierzę wpływ, uczę się i korektuję kurs. Nie jednorazowy projekt — ciągłe doskonalenie produktu i procesu w oparciu o dane.</p>
       </div>
     </div>
   </div>
@@ -555,41 +577,41 @@
 <section class="experience" id="experience">
   <div class="container">
     <div class="section-header reveal">
-      <div class="chip chip-tonal">Doświadczenie</div>
-      <h2>Ponad 8 lat budowania produktów<br>w środowisku enterprise.</h2>
+      <div class="chip chip-tonal" data-i18n="exp.chip">Doświadczenie</div>
+      <h2 data-i18n-html="exp.h2">Ponad 8 lat budowania produktów<br>w środowisku enterprise.</h2>
     </div>
     <div class="exp-list">
       <div class="exp-card reveal">
         <div class="exp-meta">
-          <strong>2025 – obecnie</strong>
-          Hybrid / Remote<br>Full-time
+          <strong data-i18n="e1.date">2025 – obecnie</strong>
+          <span data-i18n-html="e1.loc">Hybrid / Remote<br>Full-time</span>
         </div>
         <div class="exp-content">
-          <h3>Technical Product Manager</h3>
-          <div class="exp-sector">◆ Global SaaS · Video Intelligence &amp; AI</div>
-          <p>Product Owner dla funkcji AI i Computer Vision dostarczających powiadomienia operacyjne w czasie rzeczywistym. Discovery: określanie, które insighty ML dostarczają mierzalną wartość klientom, a które generują szum. Definiowanie i wdrażanie scenariuszy (labor, safety, compliance) analizowanych przez AI na bazie danych wideo. Współpraca z zespołami ML, CV, backend i UX przy operacjonalizacji modeli w produkcji.</p>
+          <h3 data-i18n="e1.title">Technical Product Manager</h3>
+          <div class="exp-sector" data-i18n="e1.sector">◆ Global SaaS · Video Intelligence &amp; AI</div>
+          <p data-i18n="e1.desc">Product Owner dla funkcji AI i Computer Vision dostarczających powiadomienia operacyjne w czasie rzeczywistym. Discovery: określanie, które insighty ML dostarczają mierzalną wartość klientom, a które generują szum. Definiowanie i wdrażanie scenariuszy (labor, safety, compliance) analizowanych przez AI na bazie danych wideo. Współpraca z zespołami ML, CV, backend i UX przy operacjonalizacji modeli w produkcji.</p>
         </div>
       </div>
       <div class="exp-card reveal">
         <div class="exp-meta">
           <strong>2022 – 2025</strong>
-          3 lata 4 mies.<br>Full-time
+          <span data-i18n-html="e2.loc">3 lata 4 mies.<br>Full-time</span>
         </div>
         <div class="exp-content">
-          <h3>Director of Video Services & Loss Prevention</h3>
-          <div class="exp-sector">◆ Global SaaS · Video Intelligence &amp; Retail Analytics</div>
-          <p>Pełny cykl życia nowego produktu od discovery z klientami, przez roadmapę, po launch w 2024. Zarządzanie 70-osobowym zespołem: procesy, warsztaty, kultura ciągłego doskonalenia i wysoka retencja. Wdrożenie Agile i Scrum skracające time-to-market. Iteracyjna optymalizacja funkcji produktu na podstawie KPI i danych behawioralnych.</p>
+          <h3 data-i18n="e2.title">Director of Video Services & Loss Prevention</h3>
+          <div class="exp-sector" data-i18n="e2.sector">◆ Global SaaS · Video Intelligence &amp; Retail Analytics</div>
+          <p data-i18n="e2.desc">Pełny cykl życia nowego produktu od discovery z klientami, przez roadmapę, po launch w 2024. Zarządzanie 70-osobowym zespołem: procesy, warsztaty, kultura ciągłego doskonalenia i wysoka retencja. Wdrożenie Agile i Scrum skracające time-to-market. Iteracyjna optymalizacja funkcji produktu na podstawie KPI i danych behawioralnych.</p>
         </div>
       </div>
       <div class="exp-card reveal">
         <div class="exp-meta">
           <strong>2017 – 2022</strong>
-          5 lat · Full-time
+          <span data-i18n="e3.loc">5 lat · Full-time</span>
         </div>
         <div class="exp-content">
-          <h3>Wcześniejsze role operacyjne i analityczne</h3>
-          <div class="exp-sector">◆ Enterprise Operations &amp; Process Management</div>
-          <p>Budowanie fundamentów analitycznych i procesowych: analiza i optymalizacja procesów operacyjnych, zarządzanie jakością, praca z danymi i obsługa klientów korporacyjnych. Baza dla późniejszego przejścia do product management.</p>
+          <h3 data-i18n="e3.title">Wcześniejsze role operacyjne i analityczne</h3>
+          <div class="exp-sector" data-i18n="e3.sector">◆ Enterprise Operations &amp; Process Management</div>
+          <p data-i18n="e3.desc">Budowanie fundamentów analitycznych i procesowych: analiza i optymalizacja procesów operacyjnych, zarządzanie jakością, praca z danymi i obsługa klientów korporacyjnych. Baza dla późniejszego przejścia do product management.</p>
         </div>
       </div>
     </div>
@@ -601,16 +623,16 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-text reveal">
-        <div class="chip chip-tonal">O mnie</div>
-        <h2>PM na styku danych,<br>procesów i potrzeb klientów.</h2>
-        <p>Jestem Technical Product Managerem specjalizującym się w złożonych, data-driven produktach. Łączę podejście analityczne z głębokimi umiejętnościami discovery — żeby budować produkty, które rozwiązują rzeczywiste problemy, a nie wyobrażenia o nich.</p>
-        <p>Przez ponad 8 lat pracowałem w środowisku globalnym przy produktach z obszaru AI, Computer Vision i platform enterprise SaaS. Wierzę, że wiedza domenowa i bliskość z klientem to nie opcja — to rdzeń dobrego product managementu.</p>
+        <div class="chip chip-tonal" data-i18n="abt.chip">O mnie</div>
+        <h2 data-i18n-html="abt.h2">PM na styku danych,<br>procesów i potrzeb klientów.</h2>
+        <p data-i18n="abt.p1">Jestem Technical Product Managerem specjalizującym się w złożonych, data-driven produktach. Łączę podejście analityczne z głębokimi umiejętnościami discovery — żeby budować produkty, które rozwiązują rzeczywiste problemy, a nie wyobrażenia o nich.</p>
+        <p data-i18n="abt.p2">Przez ponad 8 lat pracowałem w środowisku globalnym przy produktach z obszaru AI, Computer Vision i platform enterprise SaaS. Wierzę, że wiedza domenowa i bliskość z klientem to nie opcja — to rdzeń dobrego product managementu.</p>
         <div class="cert-chips">
           <span class="cert-chip">PSPO I · Scrum.org · 2024</span>
           <span class="cert-chip">ISO 9001 / 14001 Internal Auditor · TUV Nord</span>
         </div>
         <div class="about-actions">
-          <a href="#contact" class="btn btn-filled">Pracujmy razem</a>
+          <a href="#contact" class="btn btn-filled" data-i18n="abt.cta">Pracujmy razem</a>
           <a href="https://www.linkedin.com/in/michaelkus/" target="_blank" class="btn btn-outlined">LinkedIn ↗</a>
         </div>
       </div>
@@ -627,8 +649,8 @@
           </svg>
         </div>
         <div class="about-badge">
-          <strong>8+ lat</strong>
-          product management
+          <strong data-i18n="abt.badge_years">8+ lat</strong>
+          <span data-i18n="abt.badge_label">product management</span>
         </div>
       </div>
     </div>
@@ -639,8 +661,8 @@
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-header reveal" style="text-align:center;">
-      <div class="chip chip-tonal">Rekomendacja</div>
-      <h2>Co mówią o współpracy.</h2>
+      <div class="chip chip-tonal" data-i18n="tst.chip">Rekomendacja</div>
+      <h2 data-i18n="tst.h2">Co mówią o współpracy.</h2>
     </div>
     <div class="testi-wrap reveal">
       <div class="testi-card">
@@ -686,12 +708,12 @@
 <section class="contact" id="contact">
   <div class="container">
     <div class="contact-inner reveal">
-      <div class="chip">Bezpłatna konsultacja</div>
-      <h2>Porozmawiajmy o Twoim produkcie.</h2>
-      <p>Zostaw e-mail — odezwę się w ciągu 24 godzin i umówimy bezpłatne 30-minutowe spotkanie wstępne.</p>
+      <div class="chip" data-i18n="con.chip">Bezpłatna konsultacja</div>
+      <h2 data-i18n="con.h2">Porozmawiajmy o Twoim produkcie.</h2>
+      <p data-i18n="con.p">Zostaw e-mail — odezwę się w ciągu 24 godzin i umówimy bezpłatne 30-minutowe spotkanie wstępne.</p>
       <form class="contact-form" id="contactForm">
-        <input type="email" name="email" placeholder="twoj@email.com" required id="emailInput"/>
-        <button type="submit" class="btn-send">Wyślij →</button>
+        <input type="email" name="email" placeholder="twoj@email.com" required id="emailInput" data-i18n-placeholder="con.placeholder"/>
+        <button type="submit" class="btn-send" data-i18n="con.btn">Wyślij →</button>
       </form>
       <p id="formMsg" style="display:none;"></p>
     </div>
@@ -714,9 +736,9 @@
       Michał Kuś<span class="logo-dot">.</span>
     </a>
     <ul class="footer-links">
-      <li><a href="#services">Usługi</a></li>
-      <li><a href="#approach">Podejście</a></li>
-      <li><a href="#experience">Doświadczenie</a></li>
+      <li><a href="#services"   data-i18n="ftr.services">Usługi</a></li>
+      <li><a href="#approach"   data-i18n="ftr.approach">Podejście</a></li>
+      <li><a href="#experience" data-i18n="ftr.experience">Doświadczenie</a></li>
       <li><a href="https://www.linkedin.com/in/michaelkus/" target="_blank">LinkedIn ↗</a></li>
     </ul>
     <span class="footer-copy">© 2026 Michał Kuś · Gliwice, Śląskie</span>
@@ -724,23 +746,251 @@
 </footer>
 
 <script>
-  /* Nav elevation */
+  /* ══════════════════════════════════════
+     TRANSLATIONS
+  ══════════════════════════════════════ */
+  const T = {
+    pl: {
+      /* nav */
+      'nav.services':     'Usługi',
+      'nav.approach':     'Podejście',
+      'nav.experience':   'Doświadczenie',
+      'nav.testimonials': 'Rekomendacje',
+      'nav.cta':          'Porozmawiajmy',
+      /* hero */
+      'hero.chip':   'Product Manager · Discovery · AI · Process',
+      'hero.h1':     'Od problemu klienta<br>do produktu, który <strong>działa</strong>.',
+      'hero.sub':    'Łączę strukturalne product discovery, analizę i usprawnianie procesów z doświadczeniem w AI i Computer Vision — żeby budować produkty, które odpowiadają na rzeczywiste potrzeby, a nie założenia.',
+      'hero.cta':    'Umów konsultację',
+      'hero.services':'Zobacz usługi',
+      'hero.stat1':  'lat w product management',
+      'hero.stat2':  'osób w zarządzanym zespole',
+      'hero.stat3':  'certyfikat Scrum.org',
+      /* services */
+      'svc.chip': 'Czym się zajmuję',
+      'svc.h2':   'Usługi dla firm, które chcą<br>budować właściwe produkty.',
+      'svc.sub':  'Nie tylko szybko — ale w oparciu o realne problemy klientów i sprawne procesy wytwórcze.',
+      's1.title': 'Product Discovery',
+      's1.desc':  'Strukturalne odkrywanie problemów wartych rozwiązania — zanim zespół napisze pierwszą linię kodu. Wywiady, obserwacje, testowanie założeń w terenie.',
+      's2.title': 'Analiza i usprawnianie procesów',
+      's2.desc':  'Mapuję procesy biznesowe i produktowe, identyfikuję wąskie gardła oraz zbędne etapy, a następnie projektuję sprawniejsze przepływy oparte na danych.',
+      's3.title': 'Definiowanie problemów klientów',
+      's3.desc':  'Przekształcam rozmyte potrzeby i skargi w dobrze zdefiniowane problemy produktowe — precyzyjnie sformułowane, priorytetyzowalne i gotowe do rozwiązania.',
+      's4.title': 'AI & Computer Vision PM',
+      's4.desc':  'Product ownership dla produktów AI i CV: modelowanie wartości, partnerstwo z ML i CV, operacjonalizacja modeli w produkcji, rollout z właściwymi progami jakości.',
+      's5.title': 'Strategia & Roadmapa',
+      's5.desc':  'Wizja produktu oparta na danych i priorytetyzacja nakierowana na wartość. Roadmapa, która aliniuje cały zespół — techniczny i biznesowy — wokół wspólnych celów.',
+      's6.title': 'Platform & Enterprise SaaS',
+      's6.desc':  'Strategia dla platform: niezawodność, observability, SSO z enterprise identity providers i skalowalność infrastruktury produktowej w środowisku B2B.',
+      /* approach */
+      'app.chip': 'Moje podejście',
+      'app.h2':   'Discovery → Analiza → Strategia → Iteracja.',
+      'app.sub':  'Iteracyjny proces, który minimalizuje ryzyko budowania złego produktu.',
+      'a1.num':   '01 · Diagnoza',
+      'a1.title': 'Zrozumienie problemu',
+      'a1.desc':  'Wywiady z użytkownikami, analiza danych i obserwacje w terenie. Szukam rzeczywistych problemów — nie tylko tych, o których mówią klienci na pierwszym spotkaniu.',
+      'a2.num':   '02 · Analiza',
+      'a2.title': 'Mapowanie procesów',
+      'a2.desc':  'Wizualizuję aktualne przepływy, mierzę gdzie giną czas i zasoby, identyfikuję bottlenecki — żeby wiedzieć, co poprawić i w jakiej kolejności.',
+      'a3.num':   '03 · Strategia',
+      'a3.title': 'Plan i priorytetyzacja',
+      'a3.desc':  'Definiuję przestrzeń rozwiązania, buduję roadmapę opartą na wartości i alinuję zespół wokół jednego, mierzalnego celu. Nie wycena, a priorytet.',
+      'a4.num':   '04 · Iteracja',
+      'a4.title': 'Budowanie i uczenie się',
+      'a4.desc':  'Dostarczam, mierzę wpływ, uczę się i korektuję kurs. Nie jednorazowy projekt — ciągłe doskonalenie produktu i procesu w oparciu o dane.',
+      /* experience */
+      'exp.chip': 'Doświadczenie',
+      'exp.h2':   'Ponad 8 lat budowania produktów<br>w środowisku enterprise.',
+      'e1.date':  '2025 – obecnie',
+      'e1.loc':   'Hybrid / Remote<br>Full-time',
+      'e1.title': 'Technical Product Manager',
+      'e1.sector':'◆ Global SaaS · Video Intelligence & AI',
+      'e1.desc':  'Product Owner dla funkcji AI i Computer Vision dostarczających powiadomienia operacyjne w czasie rzeczywistym. Discovery: określanie, które insighty ML dostarczają mierzalną wartość klientom, a które generują szum. Definiowanie i wdrażanie scenariuszy (labor, safety, compliance) analizowanych przez AI na bazie danych wideo. Współpraca z zespołami ML, CV, backend i UX przy operacjonalizacji modeli w produkcji.',
+      'e2.loc':   '3 lata 4 mies.<br>Full-time',
+      'e2.title': 'Director of Video Services & Loss Prevention',
+      'e2.sector':'◆ Global SaaS · Video Intelligence & Retail Analytics',
+      'e2.desc':  'Pełny cykl życia nowego produktu od discovery z klientami, przez roadmapę, po launch w 2024. Zarządzanie 70-osobowym zespołem: procesy, warsztaty, kultura ciągłego doskonalenia i wysoka retencja. Wdrożenie Agile i Scrum skracające time-to-market. Iteracyjna optymalizacja funkcji produktu na podstawie KPI i danych behawioralnych.',
+      'e3.loc':   '5 lat · Full-time',
+      'e3.title': 'Wcześniejsze role operacyjne i analityczne',
+      'e3.sector':'◆ Enterprise Operations & Process Management',
+      'e3.desc':  'Budowanie fundamentów analitycznych i procesowych: analiza i optymalizacja procesów operacyjnych, zarządzanie jakością, praca z danymi i obsługa klientów korporacyjnych. Baza dla późniejszego przejścia do product management.',
+      /* about */
+      'abt.chip':        'O mnie',
+      'abt.h2':          'PM na styku danych,<br>procesów i potrzeb klientów.',
+      'abt.p1':          'Jestem Technical Product Managerem specjalizującym się w złożonych, data-driven produktach. Łączę podejście analityczne z głębokimi umiejętnościami discovery — żeby budować produkty, które rozwiązują rzeczywiste problemy, a nie wyobrażenia o nich.',
+      'abt.p2':          'Przez ponad 8 lat pracowałem w środowisku globalnym przy produktach z obszaru AI, Computer Vision i platform enterprise SaaS. Wierzę, że wiedza domenowa i bliskość z klientem to nie opcja — to rdzeń dobrego product managementu.',
+      'abt.badge_years': '8+ lat',
+      'abt.badge_label': 'product management',
+      'abt.cta':         'Pracujmy razem',
+      /* testimonials */
+      'tst.chip': 'Rekomendacja',
+      'tst.h2':   'Co mówią o współpracy.',
+      /* contact */
+      'con.chip':        'Bezpłatna konsultacja',
+      'con.h2':          'Porozmawiajmy o Twoim produkcie.',
+      'con.p':           'Zostaw e-mail — odezwę się w ciągu 24 godzin i umówimy bezpłatne 30-minutowe spotkanie wstępne.',
+      'con.placeholder': 'twoj@email.com',
+      'con.btn':         'Wyślij →',
+      /* footer */
+      'ftr.services':   'Usługi',
+      'ftr.approach':   'Podejście',
+      'ftr.experience': 'Doświadczenie',
+      /* form feedback */
+      'form.sending': 'Wysyłanie…',
+      'form.ok':      '✓ Dziękuję! Odezwę się wkrótce.',
+      'form.err':     '✗ Coś poszło nie tak. Spróbuj ponownie.',
+      'form.net':     '✗ Brak połączenia. Spróbuj ponownie.',
+    },
+    en: {
+      /* nav */
+      'nav.services':     'Services',
+      'nav.approach':     'Approach',
+      'nav.experience':   'Experience',
+      'nav.testimonials': 'Testimonials',
+      'nav.cta':          "Let's talk",
+      /* hero */
+      'hero.chip':   'Product Manager · Discovery · AI · Process',
+      'hero.h1':     'From customer problem<br>to a product that <strong>works</strong>.',
+      'hero.sub':    'I combine structured product discovery, process analysis and improvement with AI and Computer Vision expertise — to build products that address real needs, not assumptions.',
+      'hero.cta':    'Book a consultation',
+      'hero.services':'See services',
+      'hero.stat1':  'years in product management',
+      'hero.stat2':  'people managed',
+      'hero.stat3':  'Scrum.org certification',
+      /* services */
+      'svc.chip': 'What I do',
+      'svc.h2':   'Services for teams that want to<br>build the right products.',
+      'svc.sub':  'Not just fast — but grounded in real customer problems and efficient delivery processes.',
+      's1.title': 'Product Discovery',
+      's1.desc':  'Structured problem discovery before the team writes the first line of code. User interviews, observations, assumption testing in the field.',
+      's2.title': 'Process Analysis & Improvement',
+      's2.desc':  'I map business and product processes, identify bottlenecks and redundant steps, then design leaner, data-driven flows.',
+      's3.title': 'Customer Problem Framing',
+      's3.desc':  'I turn vague needs and complaints into well-defined product problems — precisely formulated, prioritisable, and ready to solve.',
+      's4.title': 'AI & Computer Vision PM',
+      's4.desc':  'Product ownership for AI and CV products: value modelling, ML/CV partnership, model operationalisation in production, rollout with the right quality thresholds.',
+      's5.title': 'Strategy & Roadmap',
+      's5.desc':  'Data-driven product vision and value-focused prioritisation. A roadmap that aligns the whole team — technical and business — around shared goals.',
+      's6.title': 'Platform & Enterprise SaaS',
+      's6.desc':  'Platform strategy: reliability, observability, SSO with enterprise identity providers, and product infrastructure scalability in B2B environments.',
+      /* approach */
+      'app.chip': 'My approach',
+      'app.h2':   'Discovery → Analysis → Strategy → Iteration.',
+      'app.sub':  'An iterative process that minimises the risk of building the wrong product.',
+      'a1.num':   '01 · Diagnosis',
+      'a1.title': 'Understanding the problem',
+      'a1.desc':  'User interviews, data analysis and field observations. I look for real problems — not just those customers mention in the first meeting.',
+      'a2.num':   '02 · Analysis',
+      'a2.title': 'Process mapping',
+      'a2.desc':  'I visualise current flows, measure where time and resources are lost, identify bottlenecks — so I know what to improve and in what order.',
+      'a3.num':   '03 · Strategy',
+      'a3.title': 'Planning & prioritisation',
+      'a3.desc':  'I define the solution space, build a value-driven roadmap, and align the team around one measurable goal. Priority over estimation.',
+      'a4.num':   '04 · Iteration',
+      'a4.title': 'Build and learn',
+      'a4.desc':  'I ship, measure impact, learn, and adjust course. Not a one-off project — continuous product and process improvement driven by data.',
+      /* experience */
+      'exp.chip': 'Experience',
+      'exp.h2':   '8+ years building products<br>in enterprise environments.',
+      'e1.date':  '2025 – present',
+      'e1.loc':   'Hybrid / Remote<br>Full-time',
+      'e1.title': 'Technical Product Manager',
+      'e1.sector':'◆ Global SaaS · Video Intelligence & AI',
+      'e1.desc':  'Product Owner for AI and Computer Vision features delivering real-time operational alerts. Discovery: determining which ML insights deliver measurable customer value vs. noise. Defining and implementing scenarios (labour, safety, compliance) analysed by AI from video data. Working with ML, CV, backend and UX teams on model operationalisation in production.',
+      'e2.loc':   '3 yrs 4 mos · Full-time',
+      'e2.title': 'Director of Video Services & Loss Prevention',
+      'e2.sector':'◆ Global SaaS · Video Intelligence & Retail Analytics',
+      'e2.desc':  'Full product lifecycle for a new product — from customer discovery through roadmap to launch in 2024. Managing a 70-person team: processes, workshops, continuous improvement culture and high retention. Agile and Scrum adoption cutting time-to-market. Iterative product feature optimisation based on KPIs and behavioural data.',
+      'e3.loc':   '5 yrs · Full-time',
+      'e3.title': 'Earlier Operational & Analytical Roles',
+      'e3.sector':'◆ Enterprise Operations & Process Management',
+      'e3.desc':  'Building analytical and process foundations: operational process analysis and optimisation, quality management, data work, and enterprise customer support. The foundation for the later transition into product management.',
+      /* about */
+      'abt.chip':        'About me',
+      'abt.h2':          'PM at the intersection of data,<br>processes and customer needs.',
+      'abt.p1':          "I'm a Technical Product Manager specialising in complex, data-driven products. I combine an analytical approach with deep discovery skills — to build products that solve real problems, not imagined ones.",
+      'abt.p2':          "For over 8 years I've worked in global environments on AI, Computer Vision and enterprise SaaS platform products. I believe that domain knowledge and proximity to the customer are not optional — they're the core of good product management.",
+      'abt.badge_years': '8+ yrs',
+      'abt.badge_label': 'product management',
+      'abt.cta':         "Let's work together",
+      /* testimonials */
+      'tst.chip': 'Testimonial',
+      'tst.h2':   'What people say about working together.',
+      /* contact */
+      'con.chip':        'Free consultation',
+      'con.h2':          "Let's talk about your product.",
+      'con.p':           "Leave your email — I'll get back to you within 24 hours and we'll set up a free 30-minute intro call.",
+      'con.placeholder': 'your@email.com',
+      'con.btn':         'Send →',
+      /* footer */
+      'ftr.services':   'Services',
+      'ftr.approach':   'Approach',
+      'ftr.experience': 'Experience',
+      /* form feedback */
+      'form.sending': 'Sending…',
+      'form.ok':      '✓ Thank you! I\'ll get back to you soon.',
+      'form.err':     '✗ Something went wrong. Please try again.',
+      'form.net':     '✗ No connection. Please try again.',
+    }
+  };
+
+  /* ══════════════════════════════════════
+     LANGUAGE SWITCHER
+  ══════════════════════════════════════ */
+  let currentLang = localStorage.getItem('lang') || 'pl';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+    /* toggle active button */
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === lang)
+    );
+    /* plain text nodes */
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = T[lang][el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+    /* html nodes (contain <br>, <strong>, etc.) */
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = T[lang][el.dataset.i18nHtml];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    /* placeholder attributes */
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const val = T[lang][el.dataset.i18nPlaceholder];
+      if (val !== undefined) el.placeholder = val;
+    });
+  }
+
+  /* init on load */
+  setLanguage(currentLang);
+
+  /* ══════════════════════════════════════
+     NAV ELEVATION
+  ══════════════════════════════════════ */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('elevated', scrollY > 10), {passive:true});
 
-  /* Scroll-reveal */
+  /* ══════════════════════════════════════
+     SCROLL-REVEAL
+  ══════════════════════════════════════ */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, {threshold:.08});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* Form — Formspree */
+  /* ══════════════════════════════════════
+     FORM — FORMSPREE
+  ══════════════════════════════════════ */
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const form   = e.target;
-    const btn    = form.querySelector('button[type="submit"]');
-    const msg    = document.getElementById('formMsg');
-    btn.textContent = 'Wysyłanie…';
+    const form = e.target;
+    const btn  = form.querySelector('button[type="submit"]');
+    const msg  = document.getElementById('formMsg');
+    const l    = currentLang;
+    btn.textContent = T[l]['form.sending'];
     btn.disabled = true;
     try {
       const res = await fetch('https://formspree.io/f/xvzyavao', {
@@ -749,24 +999,26 @@
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        msg.textContent = '✓ Dziękuję! Odezwę się wkrótce.';
+        msg.textContent = T[l]['form.ok'];
         msg.style.color = 'var(--primary-container)';
         form.reset();
       } else {
-        msg.textContent = '✗ Coś poszło nie tak. Spróbuj ponownie.';
+        msg.textContent = T[l]['form.err'];
         msg.style.color = '#ffb4ab';
       }
     } catch {
-      msg.textContent = '✗ Brak połączenia. Spróbuj ponownie.';
+      msg.textContent = T[l]['form.net'];
       msg.style.color = '#ffb4ab';
     }
     msg.style.display = 'block';
-    btn.textContent = 'Wyślij →';
+    btn.textContent = T[l]['con.btn'];
     btn.disabled = false;
     setTimeout(() => msg.style.display = 'none', 6000);
   });
 
-  /* Active nav */
+  /* ══════════════════════════════════════
+     ACTIVE NAV HIGHLIGHT
+  ══════════════════════════════════════ */
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   document.querySelectorAll('section[id]').forEach(s => {
     new IntersectionObserver(entries => {
