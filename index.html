@@ -319,6 +319,10 @@
       background:var(--surface-container-high); border-radius:var(--shape-xl);
       aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;
     }
+    .about-photo {
+      width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center top;
+      border-radius:var(--shape-xl); display:block;
+    }
     .about-badge {
       position:absolute; bottom:1.5rem; left:-1.5rem;
       background:var(--primary); color:var(--on-primary);
@@ -646,17 +650,7 @@
         </div>
       </div>
       <div class="about-img-wrap reveal d2">
-        <div class="about-img-placeholder">
-          <svg width="96" height="68" viewBox="0 0 36 26" fill="none" opacity=".22">
-            <circle cx="4"  cy="5"  r="2.3" fill="#5C948B" opacity=".5"/>
-            <circle cx="4"  cy="13" r="2.3" fill="#5C948B"/>
-            <circle cx="4"  cy="21" r="2.3" fill="#5C948B" opacity=".5"/>
-            <path d="M6.3 5  Q18 5  25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".5"/>
-            <path d="M6.3 13 L23.5 13"       stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-            <path d="M6.3 21 Q18 21 25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".5"/>
-            <circle cx="28" cy="13" r="3.2" fill="#5C948B"/>
-          </svg>
-        </div>
+        <img src="michal-kus-opt.jpg" alt="Michał Kuś — Product Manager" class="about-photo" loading="lazy" />
         <div class="about-badge">
           <strong data-i18n="abt.badge_years">8+ lat</strong>
           <span data-i18n="abt.badge_label">product management</span>
