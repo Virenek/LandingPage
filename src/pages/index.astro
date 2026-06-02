@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michał Kuś | Product Management</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='4' cy='7' r='2.5' fill='%235C948B' opacity='.45'/><circle cx='4' cy='16' r='2.5' fill='%235C948B'/><circle cx='4' cy='25' r='2.5' fill='%235C948B' opacity='.45'/><path d='M6.5 7 Q18 7 24 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='.45'/><path d='M6.5 16 L22 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round'/><path d='M6.5 25 Q18 25 24 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='.45'/><circle cx='26' cy='16' r='3.5' fill='%235C948B'/><path d='M24.5 14.8 L26 16 L24.5 17.2' stroke='white' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D5FL9NFBFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D5FL9NFBFS');
+  </script>
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:               #5C948B;
+      --on-primary:            #ffffff;
+      --primary-container:     #BEDDB5;
+      --on-primary-container:  #1a3b34;
+      --secondary:             #7AB373;
+      --on-secondary:          #ffffff;
+      --secondary-container:   #d4eecf;
+      --on-secondary-container:#0e3613;
+      --tertiary:              #969971;
+      --tertiary-container:    #e3e6cf;
+      --on-tertiary-container: #2e3118;
+      --background:            #f1f6f0;
+      --on-background:         #191d18;
+      --surface:               #f8faf7;
+      --on-surface:            #191d18;
+      --surface-variant:       #dce9da;
+      --on-surface-variant:    #404940;
+      --surface-container:     #edf4eb;
+      --surface-container-high:#e7f0e5;
+      --surface-container-top: #e1ece0;
+      --outline:               #717970;
+      --outline-variant:       #c0ccbe;
+      --state-hover-primary:   rgba(92,148,139,.08);
+      --state-hover-surface:   rgba(25,29,24,.06);
+      --shape-sm:   8px;
+      --shape-md:   12px;
+      --shape-lg:   16px;
+      --shape-xl:   28px;
+      --shape-full: 999px;
+      --elev-1: 0 1px 2px rgba(0,0,0,.08), 0 1px 6px rgba(0,0,0,.05);
+      --elev-2: 0 2px 6px rgba(0,0,0,.10), 0 2px 12px rgba(0,0,0,.07);
+      --elev-3: 0 4px 12px rgba(0,0,0,.10), 0 4px 24px rgba(0,0,0,.07);
+      --max:  1100px;
+      --mono: "Roboto Mono", "SF Mono", monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Roboto", -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--on-background);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1 { font-size: clamp(2.4rem, 5.5vw, 3.5rem); font-weight: 400; line-height: 1.14; letter-spacing: -.02em; color: var(--on-surface); }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.25; color: var(--on-surface); }
+    h3 { font-size: 1.05rem; font-weight: 500; color: var(--on-surface); }
+    p  { color: var(--on-surface-variant); line-height: 1.65; }
+    a  { color: inherit; text-decoration: none; }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+    .chip {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: .68rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid var(--primary); color: var(--primary);
+      padding: .28rem .85rem; border-radius: var(--shape-full);
+      margin-bottom: 1.1rem;
+    }
+    .chip-tonal {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: transparent;
+    }
+
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .55s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.06s} .d2{transition-delay:.12s} .d3{transition-delay:.18s}
+    .d4{transition-delay:.24s} .d5{transition-delay:.30s} .d6{transition-delay:.36s}
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      height: 64px; display:flex; align-items:center;
+      background: var(--surface);
+      transition: box-shadow .25s, background .25s;
+    }
+    nav.elevated { box-shadow: var(--elev-2); background: var(--surface-container); }
+    .nav-inner {
+      max-width: var(--max); margin:0 auto; padding:0 1.5rem;
+      display:flex; align-items:center; justify-content:space-between; width:100%;
+    }
+    .logo { display:flex; align-items:center; gap:.55rem; font-size:.9rem; font-weight:500; color:var(--on-surface); }
+    .logo-dot { color: var(--primary); }
+    .lang-switcher {
+      display:flex; align-items:center;
+      background:var(--surface-container);
+      border:1px solid var(--outline-variant);
+      border-radius:var(--shape-full);
+      padding:.18rem .25rem; margin-left:.75rem; gap:.05rem;
+    }
+    .lang-btn {
+      background:none; border:none; cursor:pointer;
+      font-family:var(--mono); font-size:.72rem; font-weight:500;
+      letter-spacing:.06em; color:var(--on-surface-variant);
+      padding:.22rem .55rem; border-radius:var(--shape-full);
+      transition:background .15s, color .15s;
+    }
+    .lang-btn.active  { background:var(--primary); color:var(--on-primary); }
+    .lang-btn:hover:not(.active) { background:var(--state-hover-primary); color:var(--on-surface); }
+    .nav-links { display:flex; gap:.2rem; list-style:none; align-items:center; }
+    .nav-link {
+      font-size:.875rem; font-weight:400; color:var(--on-surface-variant);
+      padding:.45rem .95rem; border-radius:var(--shape-full);
+      transition:background .18s, color .18s;
+    }
+    .nav-link:hover { background:var(--state-hover-primary); color:var(--on-surface); }
+    .nav-cta {
+      background:var(--primary); color:var(--on-primary) !important;
+      font-weight:500; margin-left:.4rem;
+      box-shadow:var(--elev-1); transition:box-shadow .2s, opacity .15s !important;
+    }
+    .nav-cta:hover { box-shadow:var(--elev-2); opacity:.9; background:var(--primary) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh; display:flex; flex-direction:column; justify-content:center;
+      padding: 8rem 0 5rem; position:relative; overflow:hidden;
+      background: var(--surface);
+    }
+    .blob-tr {
+      position:absolute; top:-18%; right:-8%; width:620px; height:620px; border-radius:50%;
+      background:radial-gradient(circle, rgba(190,221,181,.45) 0%, transparent 68%);
+      pointer-events:none;
+    }
+    .blob-bl {
+      position:absolute; bottom:-18%; left:-6%; width:440px; height:440px; border-radius:50%;
+      background:radial-gradient(circle, rgba(92,148,139,.1) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .grid-lines {
+      position:absolute; inset:0;
+      background-image: linear-gradient(var(--outline-variant) 1px,transparent 1px), linear-gradient(90deg,var(--outline-variant) 1px,transparent 1px);
+      background-size:56px 56px; opacity:.16;
+      mask-image:radial-gradient(ellipse 75% 75% at 50% 40%, black 20%, transparent 100%);
+      animation:gridFade 3s ease forwards;
+    }
+    @keyframes gridFade { from{opacity:0} to{opacity:.16} }
+    .hero-content { position:relative; z-index:1; }
+    .hero-chip { animation:slideUp .65s .05s both; }
+    .hero h1  { animation:slideUp .65s .14s both; margin-bottom:1.3rem; }
+    .hero h1 strong { font-weight:700; color:var(--primary); }
+    .hero-sub {
+      max-width:600px; font-size:1.05rem; color:var(--on-surface-variant);
+      margin-bottom:2.5rem; animation:slideUp .65s .23s both;
+    }
+    .hero-actions { display:flex; gap:.7rem; flex-wrap:wrap; animation:slideUp .65s .32s both; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    .btn {
+      display:inline-flex; align-items:center; gap:.4rem;
+      height:40px; padding:0 24px; border-radius:var(--shape-full);
+      font-family:"Roboto",sans-serif; font-size:.875rem; font-weight:500;
+      letter-spacing:.006em; cursor:pointer; border:none;
+      transition:box-shadow .18s, opacity .15s; position:relative; overflow:hidden;
+    }
+    .btn-filled  { background:var(--primary); color:var(--on-primary); box-shadow:var(--elev-1); }
+    .btn-filled:hover  { box-shadow:var(--elev-2); }
+    .btn-tonal   { background:var(--secondary-container); color:var(--on-secondary-container); }
+    .btn-tonal:hover { filter:brightness(.96); }
+    .btn-outlined{ background:transparent; color:var(--primary); border:1px solid var(--outline); }
+    .btn-outlined:hover{ background:var(--state-hover-primary); }
+    .hero-stats { display:flex; gap:1rem; margin-top:4rem; flex-wrap:wrap; animation:slideUp .65s .45s both; }
+    .stat-card {
+      background:var(--primary-container); border-radius:var(--shape-lg);
+      padding:1rem 1.5rem; min-width:120px;
+    }
+    .stat-num { font-size:1.85rem; font-weight:700; color:var(--on-primary-container); letter-spacing:-.03em; line-height:1.1; }
+    .stat-label { font-size:.74rem; color:var(--on-primary-container); opacity:.75; margin-top:.1rem; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      border-top:1px solid var(--outline-variant); border-bottom:1px solid var(--outline-variant);
+      padding:.8rem 0; overflow:hidden; background:var(--surface-container);
+    }
+    .marquee-track { display:flex; gap:2.5rem; white-space:nowrap; animation:marquee 28s linear infinite; }
+    .marquee-item {
+      font-family:var(--mono); font-size:.72rem; color:var(--on-surface-variant);
+      letter-spacing:.09em; text-transform:uppercase; flex-shrink:0;
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .marquee-item::before { content:'◆'; color:var(--primary); font-size:.38rem; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── SHARED SECTION STYLES ── */
+    section { padding:5.5rem 0; }
+    .section-header { margin-bottom:3rem; }
+    .section-header h2 { margin-bottom:.6rem; }
+    .section-header p { font-size:.95rem; max-width:540px; }
+
+    /* ── PROBLEM SECTION ── */
+    .problem { background:#1c2420; }
+    .problem .section-header .chip { color:var(--primary-container); border-color:rgba(190,221,181,.3); }
+    .problem .section-header h2 { color:#ffffff; }
+    .problem .section-header p  { color:rgba(255,255,255,.6); max-width:560px; }
+    .problem-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem;
+      margin-bottom:2.5rem;
+    }
+    .problem-card {
+      background:rgba(255,255,255,.05); border-radius:var(--shape-xl);
+      padding:1.75rem; border-left:3px solid var(--primary);
+      transition:background .2s;
+    }
+    .problem-card:hover { background:rgba(255,255,255,.08); }
+    .problem-card h3 { font-size:1rem; color:#ffffff; margin-bottom:.6rem; }
+    .problem-card p  { font-size:.875rem; color:rgba(255,255,255,.65); }
+    .problem-closing {
+      text-align:center; max-width:680px; margin:0 auto;
+      font-size:1rem; color:var(--on-primary); font-weight:400; line-height:1.7;
+      padding:1.5rem 2rem; background:var(--primary);
+      border-radius:var(--shape-lg);
+    }
+    .problem-closing strong { font-weight:700; }
+
+    /* ── SERVICES ── */
+    .services { background:var(--background); }
+    .services-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem;
+    }
+    .service-card {
+      background:var(--surface-container); border-radius:var(--shape-xl);
+      padding:1.75rem; cursor:default; transition:box-shadow .2s;
+      position:relative; overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .service-card::after {
+      content:''; position:absolute; inset:0; border-radius:inherit;
+      background:transparent; transition:background .18s; pointer-events:none;
+    }
+    .service-card:hover { box-shadow:var(--elev-2); }
+    .service-card:hover::after { background:var(--state-hover-surface); }
+    .svc-icon {
+      width:52px; height:52px; border-radius:var(--shape-md);
+      background:var(--primary-container);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.35rem; margin-bottom:1.1rem;
+    }
+    .service-card h3 { margin-bottom:.45rem; }
+    .service-card p  { font-size:.875rem; flex:1; }
+    .svc-deliverables {
+      margin-top:1.1rem; padding-top:1rem;
+      border-top:1px solid var(--outline-variant);
+      font-family:var(--mono); font-size:.65rem;
+      color:var(--on-surface-variant); letter-spacing:.03em;
+      line-height:2;
+    }
+
+    /* ── APPROACH ── */
+    .approach { background:var(--primary-container); }
+    .approach .section-header h2 { color:var(--on-primary-container); }
+    .approach .section-header p  { color:var(--on-primary-container); opacity:.78; }
+    .approach-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem;
+    }
+    .approach-step {
+      background:var(--surface); border-radius:var(--shape-xl);
+      padding:1.65rem; transition:box-shadow .2s;
+    }
+    .approach-step:hover { box-shadow:var(--elev-2); }
+    .step-num {
+      font-family:var(--mono); font-size:.66rem; font-weight:500;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--primary); display:block; margin-bottom:.8rem;
+    }
+    .approach-step h3 { font-size:1rem; margin-bottom:.45rem; }
+    .approach-step p  { font-size:.875rem; }
+
+    /* ── EXPERIENCE / BACKGROUND ── */
+    .experience { background:var(--surface); }
+    .exp-list { display:flex; flex-direction:column; gap:1rem; }
+    .exp-card {
+      background:var(--surface-container); border-radius:var(--shape-xl);
+      padding:1.65rem 1.75rem;
+      display:grid; grid-template-columns:150px 1fr; gap:1.75rem; align-items:start;
+      transition:box-shadow .2s;
+    }
+    .exp-card:hover { box-shadow:var(--elev-1); }
+    .exp-meta { font-family:var(--mono); font-size:.68rem; color:var(--on-surface-variant); line-height:1.85; }
+    .exp-meta strong { color:var(--primary); display:block; font-size:.72rem; margin-bottom:.1rem; }
+    .exp-content h3 { font-size:1rem; margin-bottom:.2rem; }
+    .exp-sector {
+      font-size:.74rem; color:var(--primary); font-family:var(--mono);
+      letter-spacing:.04em; margin-bottom:.6rem; display:flex; align-items:center; gap:.35rem;
+    }
+    .exp-content p { font-size:.875rem; }
+
+    /* ── ABOUT ── */
+    .about { background:var(--surface-variant); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .about-text > p { margin-bottom:1rem; }
+    .about-img-wrap { position:relative; }
+    .about-photo {
+      width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center top;
+      border-radius:var(--shape-xl); display:block;
+    }
+    .about-badge {
+      position:absolute; bottom:1.5rem; left:-1.5rem;
+      background:var(--primary); color:var(--on-primary);
+      padding:.85rem 1.25rem; border-radius:var(--shape-lg);
+      font-size:.8rem; font-weight:400; line-height:1.45; box-shadow:var(--elev-3);
+    }
+    .about-badge strong { display:block; font-size:1.4rem; font-weight:700; line-height:1.1; }
+    .cert-chips { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:1.4rem; }
+    .cert-chip {
+      font-family:var(--mono); font-size:.66rem; letter-spacing:.04em;
+      border:1px solid var(--outline-variant); color:var(--on-surface-variant);
+      padding:.24rem .72rem; border-radius:var(--shape-full);
+    }
+    .about-actions { display:flex; gap:.7rem; flex-wrap:wrap; margin-top:1.75rem; }
+
+    /* ── FEATURED ARTICLE ── */
+    .article-feature { background:var(--background); }
+    .article-card {
+      background:var(--surface); border-radius:var(--shape-xl);
+      box-shadow:var(--elev-2); overflow:hidden;
+      display:grid; grid-template-columns:1fr 380px;
+      max-width:900px; margin:0 auto;
+    }
+    .article-card-body { padding:2.5rem; }
+    .article-label {
+      font-family:var(--mono); font-size:.66rem; font-weight:500;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--primary); display:block; margin-bottom:1rem;
+    }
+    .article-card h3 {
+      font-size:clamp(1.2rem,2.5vw,1.55rem); font-weight:400;
+      line-height:1.3; color:var(--on-surface); margin-bottom:.9rem;
+    }
+    .article-card > .article-card-body > p { font-size:.9rem; margin-bottom:1.75rem; }
+    .article-card-visual {
+      background:var(--primary-container);
+      display:flex; flex-direction:column; justify-content:center; padding:2rem 1.75rem;
+      gap:.75rem;
+    }
+    .article-topic {
+      font-family:var(--mono); font-size:.7rem; letter-spacing:.03em;
+      color:var(--on-primary-container); display:flex; align-items:flex-start; gap:.55rem;
+      line-height:1.5;
+    }
+    .article-topic::before { content:'→'; flex-shrink:0; margin-top:.05rem; }
+    .article-btn {
+      display:inline-flex; align-items:center; gap:.4rem;
+      height:40px; padding:0 24px; border-radius:var(--shape-full);
+      background:var(--primary); color:var(--on-primary);
+      font-family:"Roboto",sans-serif; font-size:.875rem; font-weight:500;
+      border:none; cursor:default; box-shadow:var(--elev-1); opacity:.7;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonials { background:var(--surface-container); }
+    .testi-wrap { max-width:760px; margin:0 auto; }
+    .testi-card {
+      background:var(--surface); border-radius:var(--shape-xl);
+      box-shadow:var(--elev-2); overflow:hidden;
+    }
+    .testi-top-bar { height:4px; background:linear-gradient(90deg, var(--primary), var(--secondary)); }
+    .testi-body { padding:2.25rem; }
+    .quote-glyph { font-size:3.2rem; line-height:1; color:var(--primary-container); font-family:Georgia,serif; margin-bottom:.1rem; }
+    .testi-text { font-size:.98rem; color:var(--on-surface); line-height:1.8; margin-bottom:1.6rem; }
+    .testi-footer { display:flex; align-items:center; gap:.9rem; }
+    .testi-avatar {
+      width:44px; height:44px; border-radius:50%;
+      background:var(--primary-container);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.8rem; font-weight:600; color:var(--on-primary-container); flex-shrink:0;
+    }
+    .testi-name { font-size:.9rem; font-weight:500; color:var(--on-surface); }
+    .testi-role { font-size:.78rem; color:var(--on-surface-variant); }
+    .li-badge {
+      margin-left:auto; display:flex; align-items:center; gap:.35rem;
+      font-family:var(--mono); font-size:.63rem; letter-spacing:.05em;
+      color:var(--outline); border:1px solid var(--outline-variant);
+      padding:.22rem .62rem; border-radius:var(--shape-full);
+    }
+
+    /* ── CONTACT ── */
+    .contact { background:var(--primary); }
+    .contact-inner { max-width:620px; margin:0 auto; text-align:center; }
+    .contact-inner .chip { color:var(--primary-container); border-color:rgba(190,221,181,.5); }
+    .contact-inner h2 { color:var(--on-primary); margin-bottom:.8rem; }
+    .contact-inner > p { color:rgba(255,255,255,.72); margin-bottom:2rem; }
+    .contact-form { display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; }
+    .contact-form input {
+      flex:1; min-width:200px; height:48px; padding:0 20px;
+      border-radius:var(--shape-full); font-size:.9rem; outline:none;
+      border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.14);
+      color:var(--on-primary); transition:border-color .2s, background .2s;
+    }
+    .contact-form input::placeholder { color:rgba(255,255,255,.42); }
+    .contact-form input:focus { border-color:var(--primary-container); background:rgba(255,255,255,.2); }
+    .btn-send {
+      height:48px; padding:0 28px; border-radius:var(--shape-full);
+      background:var(--on-primary); color:var(--primary);
+      font-family:"Roboto",sans-serif; font-size:.875rem; font-weight:600;
+      border:none; cursor:pointer; box-shadow:var(--elev-2);
+      transition:opacity .15s, box-shadow .2s;
+    }
+    .btn-send:hover { opacity:.9; box-shadow:var(--elev-3); }
+    #formMsg { margin-top:.9rem; font-size:.85rem; color:var(--primary-container); }
+
+    /* ── FOOTER ── */
+    footer {
+      background:var(--surface-container-top);
+      border-top:1px solid var(--outline-variant); padding:1.85rem 0;
+    }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    .footer-links { display:flex; gap:1.4rem; list-style:none; }
+    .footer-links a { font-size:.82rem; color:var(--on-surface-variant); transition:color .18s; }
+    .footer-links a:hover { color:var(--primary); }
+    .footer-copy { font-size:.76rem; color:var(--outline); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .about-grid{grid-template-columns:1fr;gap:2.5rem}
+      .about-img-wrap{order:-1}
+      .about-badge{left:0}
+      .hero-stats{gap:.75rem}
+      section{padding:4rem 0}
+      .exp-card{grid-template-columns:1fr;gap:.5rem}
+      .article-card{grid-template-columns:1fr}
+      .article-card-visual{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg width="34" height="24" viewBox="0 0 36 26" fill="none">
+        <circle cx="4"  cy="5"  r="2.3" fill="#5C948B" opacity=".4"/>
+        <circle cx="4"  cy="13" r="2.3" fill="#5C948B"/>
+        <circle cx="4"  cy="21" r="2.3" fill="#5C948B" opacity=".4"/>
+        <path d="M6.3 5  Q18 5  25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <path d="M6.3 13 L23.5 13"       stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M6.3 21 Q18 21 25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <circle cx="28" cy="13" r="3.2" fill="#5C948B"/>
+        <path d="M26.2 11.8 L28 13 L26.2 14.2" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Michał Kuś<span class="logo-dot">.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services"     class="nav-link" data-i18n="nav.services">Usługi</a></li>
+      <li><a href="#approach"     class="nav-link" data-i18n="nav.approach">Jak pracuję</a></li>
+      <li><a href="#about"        class="nav-link" data-i18n="nav.about">O mnie</a></li>
+      <li><a href="#testimonials" class="nav-link" data-i18n="nav.testimonials">Rekomendacje</a></li>
+      <li><a href="#contact"      class="nav-link nav-cta" data-i18n="nav.cta">Porozmawiajmy</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pl" onclick="setLanguage('pl')">PL</button>
+      <button class="lang-btn"        data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="blob-tr"></div>
+  <div class="blob-bl"></div>
+  <div class="grid-lines"></div>
+  <div class="container hero-content">
+    <div class="chip hero-chip" data-i18n="hero.chip">Product Management · Discovery Operacyjny · AI</div>
+    <h1 data-i18n-html="hero.h1">Zanim zbudujesz produkt,<br>zrozum <strong>problem</strong>.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Pomagam organizacjom zidentyfikować rzeczywiste wyzwania operacyjne i produktowe,
+      zanim zainwestują w oprogramowanie, automatyzację lub AI.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-filled">
+        <span data-i18n="hero.cta">Umów konsultację</span>
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#approach" class="btn btn-outlined" data-i18n="hero.how">Zobacz jak pracuję</a>
+      <a href="https://www.linkedin.com/in/michaelkus/" target="_blank" class="btn btn-tonal">LinkedIn ↗</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label" data-i18n="hero.stat1">lat w product managemencie</div></div>
+      <div class="stat-card"><div class="stat-num">70+</div><div class="stat-label" data-i18n="hero.stat2">osób w zarządzanym zespole</div></div>
+      <div class="stat-card"><div class="stat-num">PSPO&nbsp;I</div><div class="stat-label" data-i18n="hero.stat3">certyfikat Scrum.org</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Operational Discovery</span>
+    <span class="marquee-item">Process Analysis</span>
+    <span class="marquee-item">Root Cause Analysis</span>
+    <span class="marquee-item">AI Readiness</span>
+    <span class="marquee-item">Problem Framing</span>
+    <span class="marquee-item">Process Redesign</span>
+    <span class="marquee-item">Business Value Validation</span>
+    <span class="marquee-item">Adoption Strategy</span>
+    <span class="marquee-item">Fractional PM</span>
+    <span class="marquee-item">Change Management</span>
+    <span class="marquee-item">Operational Discovery</span>
+    <span class="marquee-item">Process Analysis</span>
+    <span class="marquee-item">Root Cause Analysis</span>
+    <span class="marquee-item">AI Readiness</span>
+    <span class="marquee-item">Problem Framing</span>
+    <span class="marquee-item">Process Redesign</span>
+    <span class="marquee-item">Business Value Validation</span>
+    <span class="marquee-item">Adoption Strategy</span>
+    <span class="marquee-item">Fractional PM</span>
+    <span class="marquee-item">Change Management</span>
+  </div>
+</div>
+
+<!-- ══ PROBLEM ══ -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="chip" data-i18n="prb.chip">Rzeczywistość</div>
+      <h2 data-i18n="prb.h2">Dlaczego tak wiele inicjatyw zawodzi</h2>
+      <p data-i18n="prb.sub">Najczęstszy problem to nie zła technologia, lecz sięganie po technologię zbyt wcześnie.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal d1">
+        <h3 data-i18n="prb.c1.title">Oprogramowanie bez adopcji</h3>
+        <p data-i18n="prb.c1.text">Organizacja wdraża nowe oprogramowanie, ale pracownicy nadal omijają je w codziennej pracy. Wdrożenie techniczne jest udane, adopcja żadna. Pieniądze zostały wydane, problem pozostał.</p>
+      </div>
+      <div class="problem-card reveal d2">
+        <h3 data-i18n="prb.c2.title">Automatyzacja bez definicji</h3>
+        <p data-i18n="prb.c2.text">Zespół automatyzuje proces, który nigdy nie był jasno zdefiniowany. Efekt: szybciej produkuje błędne wyniki. Technologia nie naprawia niejasnych procesów, lecz przyspiesza ich skutki.</p>
+      </div>
+      <div class="problem-card reveal d3">
+        <h3 data-i18n="prb.c3.title">AI bez potrzeby</h3>
+        <p data-i18n="prb.c3.text">Firma wdraża AI, bo AI jest modne, nie dlatego, że zrozumiała, czy AI rozwiązuje jej rzeczywisty problem. Inicjatywa pochłania zasoby i nie zmienia wyników biznesowych.</p>
+      </div>
+    </div>
+    <div class="problem-closing reveal">
+      <span data-i18n-html="prb.closing">Problem rzadko leży w technologii. Zwykle tkwi w <strong>niejasnej definicji problemu</strong>, który organizacja próbuje rozwiązać.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="chip chip-tonal" data-i18n="svc.chip">Usługi</div>
+      <h2 data-i18n="svc.h2">Trzy sposoby, w jakie mogę pomóc.</h2>
+      <p data-i18n="svc.sub">Każde zaangażowanie zaczyna się od zrozumienia problemu, nie od proponowania rozwiązania.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal d1">
+        <div class="svc-icon">🔍</div>
+        <h3 data-i18n="s1.title">Discovery operacyjne i produktowy</h3>
+        <p data-i18n="s1.desc">Analizuję procesy operacyjne i wyzwania produktowe, by odkryć rzeczywiste przyczyny problemów, zanim organizacja zainwestuje w rozwiązanie.</p>
+        <div class="svc-deliverables" data-i18n="s1.deliverables">Analiza procesów · Identyfikacja wąskich gardeł · Ocena możliwości · Rekomendacje strategiczne</div>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="svc-icon">⚡</div>
+        <h3 data-i18n="s2.title">Gotowość na AI i automatyzację</h3>
+        <p data-i18n="s2.desc">Oceniam, czy automatyzacja lub AI faktycznie stworzy wartość, czy tylko doda złożoności do istniejących problemów procesowych.</p>
+        <div class="svc-deliverables" data-i18n="s2.deliverables">Dojrzałość procesów · Jakość danych · Ryzyko adopcji · Oczekiwany wpływ biznesowy</div>
+      </div>
+      <div class="service-card reveal d3">
+        <div class="svc-icon">🎯</div>
+        <h3 data-i18n="s3.title">Fractional Product Leadership</h3>
+        <p data-i18n="s3.desc">Wspieram organizacje w podejmowaniu decyzji produktowych i operacyjnych nakierowanych na mierzalne wyniki biznesowe, bez zatrudniania pełnoetatowego PM.</p>
+        <div class="svc-deliverables" data-i18n="s3.deliverables">Priorytetyzacja produktowa · Decyzje build/buy/automate · Strategia adopcji · Roadmapa oparta na wartości</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPROACH ══ -->
+<section class="approach" id="approach">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="chip" style="border-color:rgba(26,59,52,.35);color:var(--on-primary-container);" data-i18n="app.chip">Moje podejście</div>
+      <h2 style="color:var(--on-primary-container);" data-i18n="app.h2">Najpierw zrozum. Potem buduj.</h2>
+      <p data-i18n="app.sub">Technologia to jeden z możliwych wyników, nie punkt wyjścia.</p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-step reveal d1">
+        <span class="step-num" data-i18n="a1.num">01 · Rozumienie</span>
+        <h3 data-i18n="a1.title">Jak naprawdę pracujecie</h3>
+        <p data-i18n="a1.desc">Zanim cokolwiek zaproponuję, spędzam czas na zrozumieniu, jak organizacja rzeczywiście funkcjonuje. Nie jak powinna funkcjonować według dokumentacji, ale jak naprawdę wygląda praca ludzi.</p>
+      </div>
+      <div class="approach-step reveal d2">
+        <span class="step-num" data-i18n="a2.num">02 · Analiza</span>
+        <h3 data-i18n="a2.title">Gdzie ginie wartość</h3>
+        <p data-i18n="a2.desc">Identyfikuję wąskie gardła, zbędne etapy i miejsca, gdzie czas i zasoby są marnotrawione. Patrzę na dane i rozmawiam z ludźmi, nie tylko z menedżerami.</p>
+      </div>
+      <div class="approach-step reveal d3">
+        <span class="step-num" data-i18n="a3.num">03 · Diagnoza</span>
+        <h3 data-i18n="a3.title">Jakiego rozwiązania naprawdę potrzebujesz</h3>
+        <p data-i18n="a3.desc">Dopiero po zrozumieniu problemu oceniam: czy potrzebna jest zmiana procesu, budowa produktu, automatyzacja, czy może AI. Technologia to jeden z możliwych wyników, nie punkt wyjścia.</p>
+      </div>
+      <div class="approach-step reveal d4">
+        <span class="step-num" data-i18n="a4.num">04 · Wdrożenie</span>
+        <h3 data-i18n="a4.title">Adopcja i mierzalny wpływ</h3>
+        <p data-i18n="a4.desc">Rozwiązanie, które nie jest adoptowane, nie ma wartości. Dbam o to, żeby zmiany były wdrożone, przyjęte przez ludzi i mierzalne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE / BACKGROUND ══ -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="chip chip-tonal" data-i18n="exp.chip">Doświadczenie</div>
+      <h2 data-i18n-html="exp.h2">5+ lat na styku operacji,<br>produktu i technologii.</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <strong data-i18n="e1.date">2025 – obecnie</strong>
+          <span data-i18n-html="e1.loc">Hybrid / Remote<br>Full-time</span>
+        </div>
+        <div class="exp-content">
+          <h3 data-i18n="e1.title">Technical Product Manager</h3>
+          <div class="exp-sector" data-i18n="e1.sector">◆ Global SaaS · Video Intelligence &amp; AI</div>
+          <p data-i18n="e1.desc">Discovery zorientowany na wartość: ocena, które insighty AI dostarczają mierzalne korzyści biznesowe, a które generują szum operacyjny. Definiowanie scenariuszy (safety, compliance, labor) z perspektywy problemu biznesowego, nie możliwości technologicznych. Współpraca z ML, CV i UX przy operacjonalizacji modeli w produkcji.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <strong>2022 – 2025</strong>
+          <span data-i18n-html="e2.loc">3 lata 4 mies.<br>Full-time</span>
+        </div>
+        <div class="exp-content">
+          <h3 data-i18n="e2.title">Director of Video Services & Loss Prevention</h3>
+          <div class="exp-sector" data-i18n="e2.sector">◆ Global SaaS · Video Intelligence &amp; Retail Analytics</div>
+          <p data-i18n="e2.desc">Pełny cykl życia produktu od discovery z klientami po launch, z naciskiem na adopcję i mierzalne wyniki. Zarządzanie 70-osobowym zespołem operacyjnym: projektowanie procesów, eliminacja wąskich gardeł, kultura ciągłego doskonalenia. Wdrożenie Agile skracające time-to-market.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <strong>2017 – 2022</strong>
+          <span data-i18n="e3.loc">5 lat · Full-time</span>
+        </div>
+        <div class="exp-content">
+          <h3 data-i18n="e3.title">Operational & Analytical Leadership</h3>
+          <div class="exp-sector" data-i18n="e3.sector">◆ Enterprise Operations &amp; Process Management</div>
+          <p data-i18n="e3.desc">Fundament perspektywy: analiza i optymalizacja procesów operacyjnych, zarządzanie jakością, praca z danymi i klientami korporacyjnymi. Tu ukształtowało się przekonanie, że problemy operacyjne rzadko wymagają nowego oprogramowania, najczęściej wymagają lepszego zrozumienia procesu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="chip chip-tonal" data-i18n="abt.chip">O mnie</div>
+        <h2 data-i18n-html="abt.h2">PM, który zaczyna od procesu,<br>nie od produktu.</h2>
+        <p data-i18n="abt.p1">Przez lata pracowałem na styku operacji, product managementu i technologii. To połączenie ukształtowało proste przekonanie: większość organizacji nie cierpi na brak oprogramowania. Cierpi na brak jasności co do problemów, które próbuje rozwiązać.</p>
+        <p data-i18n="abt.p2">Zarządzałem dużymi zespołami operacyjnymi, budowałem produkty AI i Computer Vision, prowadziłem discovery z klientami i wdrażałem zmiany procesowe w środowisku enterprise. Ten zakres doświadczeń daje mi perspektywę, której nie ma typowy Product Manager skupiony wyłącznie na roadmapie i backlogu.</p>
+        <div class="cert-chips">
+          <span class="cert-chip">PSPO I · Scrum.org · 2024</span>
+          <span class="cert-chip">ISO 9001 / 14001 Internal Auditor · TUV Nord</span>
+        </div>
+        <div class="about-actions">
+          <a href="#contact" class="btn btn-filled" data-i18n="abt.cta">Pracujmy razem</a>
+          <a href="https://www.linkedin.com/in/michaelkus/" target="_blank" class="btn btn-outlined">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="about-img-wrap reveal d2">
+        <img src="/michal-kus-opt.jpg" alt="Michał Kuś, Product Manager" class="about-photo" loading="lazy" />
+        <div class="about-badge">
+          <strong data-i18n="abt.badge_years">8 lat</strong>
+          <span data-i18n="abt.badge_label">PM &amp; Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURED ARTICLE ══ -->
+<section class="article-feature" id="article">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <div class="chip chip-tonal" data-i18n="art.chip">Artykuł</div>
+      <h2 data-i18n="art.h2">Perspektywa na product management</h2>
+    </div>
+    <div class="article-card reveal">
+      <div class="article-card-body">
+        <span class="article-label" data-i18n="art.label">Wkrótce</span>
+        <h3 data-i18n="art.title">Jak odróżnić problem procesowy od produktowego?</h3>
+        <p data-i18n="art.desc">Dlaczego organizacje zbyt szybko sięgają po rozwiązania, i jak podjąć właściwą decyzję między zmianą procesu, budową produktu a wdrożeniem AI.</p>
+        <div class="article-btn" data-i18n="art.cta">Wkrótce →</div>
+      </div>
+      <div class="article-card-visual">
+        <div class="article-topics">
+          <div class="article-topic" data-i18n="art.t1">Dlaczego organizacje za szybko sięgają po rozwiązania</div>
+          <div class="article-topic" data-i18n="art.t2">Automatyzacja wzmacnia zły proces, nie naprawia go</div>
+          <div class="article-topic" data-i18n="art.t3">Adopcja ≠ wdrożenie techniczne</div>
+          <div class="article-topic" data-i18n="art.t4">Jak zdecydować: zmiana procesu, produkt czy AI?</div>
+          <div class="article-topic" data-i18n="art.t5">Związek między discovery a analizą operacyjną</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIAL ══ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <div class="chip chip-tonal" data-i18n="tst.chip">Rekomendacja</div>
+      <h2 data-i18n="tst.h2">Co mówią o współpracy.</h2>
+    </div>
+    <div class="testi-wrap reveal">
+      <div class="testi-card">
+        <div class="testi-top-bar"></div>
+        <div class="testi-body">
+          <div class="quote-glyph">"</div>
+          <p class="testi-text">
+            I've had the pleasure of not only calling Michał a good friend but also a trusted
+            colleague when it comes to navigating business landscapes. His ability to manage
+            a large team with ease is nothing short of impressive.<br><br>
+            What sets him apart is not just his leadership but his analytical prowess. Michał
+            has an exceptional talent for digging deep to understand the core of any problem,
+            steering clear of superficial explanations that barely scratch the surface.<br><br>
+            His decisions are always informed by data, a testament to his logical and
+            results-driven approach to challenges. In a world where gut feelings often sway
+            judgment, Michał's reliance on hard facts and figures has been a breath of
+            fresh air.<br><br>
+            Although we have never worked together within the same company, he has always been
+            my go-to person for challenging discussions on business, people, and management
+            ideas. I've benefited immensely from his insights, and I'm confident he will be
+            an invaluable asset to any organization fortunate enough to have him.
+          </p>
+          <div class="testi-footer">
+            <div class="testi-avatar">MF</div>
+            <div>
+              <div class="testi-name">Marcin Fuja</div>
+              <div class="testi-role">Software Engineering Manager · Netguru</div>
+            </div>
+            <div class="li-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <div class="chip" data-i18n="con.chip">Bezpłatna konsultacja</div>
+      <h2 data-i18n="con.h2">Zanim zainwestujesz w rozwiązanie, porozmawiajmy o problemie.</h2>
+      <p data-i18n="con.p">30 minut rozmowy, żeby ocenić czy masz problem procesowy, produktowy czy AI. Bez zobowiązań.</p>
+      <form class="contact-form" id="contactForm">
+        <input type="email" name="email" placeholder="twoj@email.com" required id="emailInput" data-i18n-placeholder="con.placeholder"/>
+        <button type="submit" class="btn-send" data-i18n="con.btn">Wyślij →</button>
+      </form>
+      <p id="formMsg" style="display:none;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#" class="logo">
+      <svg width="28" height="20" viewBox="0 0 36 26" fill="none">
+        <circle cx="4"  cy="5"  r="2.3" fill="#5C948B" opacity=".4"/>
+        <circle cx="4"  cy="13" r="2.3" fill="#5C948B"/>
+        <circle cx="4"  cy="21" r="2.3" fill="#5C948B" opacity=".4"/>
+        <path d="M6.3 5  Q18 5  25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <path d="M6.3 13 L23.5 13"       stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M6.3 21 Q18 21 25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <circle cx="28" cy="13" r="3.2" fill="#5C948B"/>
+      </svg>
+      Michał Kuś<span class="logo-dot">.</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="#services"   data-i18n="ftr.services">Usługi</a></li>
+      <li><a href="#approach"   data-i18n="ftr.approach">Jak pracuję</a></li>
+      <li><a href="#about"      data-i18n="ftr.about">O mnie</a></li>
+      <li><a href="https://www.linkedin.com/in/michaelkus/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Michał Kuś · Gliwice, Śląskie</span>
+  </div>
+</footer>
+
+<script>
+  /* ══ TRANSLATIONS ══ */
+  const T = {
+    pl: {
+      'nav.services':     'Usługi',
+      'nav.approach':     'Jak pracuję',
+      'nav.about':        'O mnie',
+      'nav.testimonials': 'Rekomendacje',
+      'nav.cta':          'Porozmawiajmy',
+      'hero.chip':   'Product Management · Discovery Operacyjny · AI',
+      'hero.h1':     'Zanim zbudujesz produkt,<br>zrozum <strong>problem</strong>.',
+      'hero.sub':    'Pomagam organizacjom zidentyfikować rzeczywiste wyzwania operacyjne i produktowe, zanim zainwestują w oprogramowanie, automatyzację lub AI.',
+      'hero.cta':    'Umów konsultację',
+      'hero.how':    'Zobacz jak pracuję',
+      'hero.stat1':  'lat w product managemencie',
+      'hero.stat2':  'osób w zarządzanym zespole',
+      'hero.stat3':  'certyfikat Scrum.org',
+      'prb.chip':  'Rzeczywistość',
+      'prb.h2':    'Dlaczego tak wiele inicjatyw zawodzi',
+      'prb.sub':   'Najczęstszy problem to nie zła technologia, lecz sięganie po technologię zbyt wcześnie.',
+      'prb.c1.title': 'Oprogramowanie bez adopcji',
+      'prb.c1.text':  'Organizacja wdraża nowe oprogramowanie, ale pracownicy nadal omijają je w codziennej pracy. Wdrożenie techniczne jest udane, adopcja żadna. Pieniądze zostały wydane, problem pozostał.',
+      'prb.c2.title': 'Automatyzacja bez definicji',
+      'prb.c2.text':  'Zespół automatyzuje proces, który nigdy nie był jasno zdefiniowany. Efekt: szybciej produkuje błędne wyniki. Technologia nie naprawia niejasnych procesów, lecz przyspiesza ich skutki.',
+      'prb.c3.title': 'AI bez potrzeby',
+      'prb.c3.text':  'Firma wdraża AI, bo AI jest modne, nie dlatego, że zrozumiała, czy AI rozwiązuje jej rzeczywisty problem. Inicjatywa pochłania zasoby i nie zmienia wyników biznesowych.',
+      'prb.closing': 'Problem rzadko leży w technologii. Zwykle tkwi w <strong>niejasnej definicji problemu</strong>, który organizacja próbuje rozwiązać.',
+      'svc.chip': 'Usługi',
+      'svc.h2':   'Trzy sposoby, w jakie mogę pomóc.',
+      'svc.sub':  'Każde zaangażowanie zaczyna się od zrozumienia problemu, nie od proponowania rozwiązania.',
+      's1.title': 'Discovery operacyjne i produktowy',
+      's1.desc':  'Analizuję procesy operacyjne i wyzwania produktowe, by odkryć rzeczywiste przyczyny problemów, zanim organizacja zainwestuje w rozwiązanie.',
+      's1.deliverables': 'Analiza procesów · Identyfikacja wąskich gardeł · Ocena możliwości · Rekomendacje strategiczne',
+      's2.title': 'Gotowość na AI i automatyzację',
+      's2.desc':  'Oceniam, czy automatyzacja lub AI faktycznie stworzy wartość, czy tylko doda złożoności do istniejących problemów procesowych.',
+      's2.deliverables': 'Dojrzałość procesów · Jakość danych · Ryzyko adopcji · Oczekiwany wpływ biznesowy',
+      's3.title': 'Fractional Product Leadership',
+      's3.desc':  'Wspieram organizacje w podejmowaniu decyzji produktowych i operacyjnych nakierowanych na mierzalne wyniki biznesowe, bez zatrudniania pełnoetatowego PM.',
+      's3.deliverables': 'Priorytetyzacja produktowa · Decyzje build/buy/automate · Strategia adopcji · Roadmapa oparta na wartości',
+      'app.chip': 'Moje podejście',
+      'app.h2':   'Najpierw zrozum. Potem buduj.',
+      'app.sub':  'Technologia to jeden z możliwych wyników, nie punkt wyjścia.',
+      'a1.num':   '01 · Rozumienie',
+      'a1.title': 'Jak naprawdę pracujecie',
+      'a1.desc':  'Zanim cokolwiek zaproponuję, spędzam czas na zrozumieniu, jak organizacja rzeczywiście funkcjonuje. Nie jak powinna funkcjonować według dokumentacji, ale jak naprawdę wygląda praca ludzi.',
+      'a2.num':   '02 · Analiza',
+      'a2.title': 'Gdzie ginie wartość',
+      'a2.desc':  'Identyfikuję wąskie gardła, zbędne etapy i miejsca, gdzie czas i zasoby są marnotrawione. Patrzę na dane i rozmawiam z ludźmi, nie tylko z menedżerami.',
+      'a3.num':   '03 · Diagnoza',
+      'a3.title': 'Jakiego rozwiązania naprawdę potrzebujesz',
+      'a3.desc':  'Dopiero po zrozumieniu problemu oceniam: czy potrzebna jest zmiana procesu, budowa produktu, automatyzacja, czy może AI. Technologia to jeden z możliwych wyników, nie punkt wyjścia.',
+      'a4.num':   '04 · Wdrożenie',
+      'a4.title': 'Adopcja i mierzalny wpływ',
+      'a4.desc':  'Rozwiązanie, które nie jest adoptowane, nie ma wartości. Dbam o to, żeby zmiany były wdrożone, przyjęte przez ludzi i mierzalne.',
+      'exp.chip': 'Doświadczenie',
+      'exp.h2':   '5+ lat na styku operacji,<br>produktu i technologii.',
+      'e1.date':  '2025 – obecnie',
+      'e1.loc':   'Hybrid / Remote<br>Full-time',
+      'e1.title': 'Technical Product Manager',
+      'e1.sector':'◆ Global SaaS · Video Intelligence & AI',
+      'e1.desc':  'Discovery zorientowany na wartość: ocena, które insighty AI dostarczają mierzalne korzyści biznesowe, a które generują szum operacyjny. Definiowanie scenariuszy (safety, compliance, labor) z perspektywy problemu biznesowego, nie możliwości technologicznych. Współpraca z ML, CV i UX przy operacjonalizacji modeli w produkcji.',
+      'e2.loc':   '3 lata 4 mies.<br>Full-time',
+      'e2.title': 'Director of Video Services & Loss Prevention',
+      'e2.sector':'◆ Global SaaS · Video Intelligence & Retail Analytics',
+      'e2.desc':  'Pełny cykl życia produktu od discovery z klientami po launch, z naciskiem na adopcję i mierzalne wyniki. Zarządzanie 70-osobowym zespołem operacyjnym: projektowanie procesów, eliminacja wąskich gardeł, kultura ciągłego doskonalenia. Wdrożenie Agile skracające time-to-market.',
+      'e3.loc':   '5 lat · Full-time',
+      'e3.title': 'Operational & Analytical Leadership',
+      'e3.sector':'◆ Enterprise Operations & Process Management',
+      'e3.desc':  'Fundament perspektywy: analiza i optymalizacja procesów operacyjnych, zarządzanie jakością, praca z danymi i klientami korporacyjnymi. Tu ukształtowało się przekonanie, że problemy operacyjne rzadko wymagają nowego oprogramowania, najczęściej wymagają lepszego zrozumienia procesu.',
+      'abt.chip':        'O mnie',
+      'abt.h2':          'PM, który zaczyna od procesu,<br>nie od produktu.',
+      'abt.p1':          'Przez lata pracowałem na styku operacji, product managementu i technologii. To połączenie ukształtowało proste przekonanie: większość organizacji nie cierpi na brak oprogramowania. Cierpi na brak jasności co do problemów, które próbuje rozwiązać.',
+      'abt.p2':          'Zarządzałem dużymi zespołami operacyjnymi, budowałem produkty AI i Computer Vision, prowadziłem discovery z klientami i wdrażałem zmiany procesowe w środowisku enterprise. Ten zakres doświadczeń daje mi perspektywę, której nie ma typowy Product Manager skupiony wyłącznie na roadmapie i backlogu.',
+      'abt.badge_years': '8 lat',
+      'abt.badge_label': 'PM & Operations',
+      'abt.cta':         'Pracujmy razem',
+      'art.chip':  'Artykuł',
+      'art.h2':    'Perspektywa na product management',
+      'art.label': 'Wkrótce',
+      'art.title': 'Jak odróżnić problem procesowy od produktowego?',
+      'art.desc':  'Dlaczego organizacje zbyt szybko sięgają po rozwiązania, i jak podjąć właściwą decyzję między zmianą procesu, budową produktu a wdrożeniem AI.',
+      'art.cta':   'Wkrótce →',
+      'art.t1':    'Dlaczego organizacje za szybko sięgają po rozwiązania',
+      'art.t2':    'Automatyzacja wzmacnia zły proces, nie naprawia go',
+      'art.t3':    'Adopcja ≠ wdrożenie techniczne',
+      'art.t4':    'Jak zdecydować: zmiana procesu, produkt czy AI?',
+      'art.t5':    'Związek między discovery a analizą operacyjną',
+      'tst.chip': 'Rekomendacja',
+      'tst.h2':   'Co mówią o współpracy.',
+      'con.chip':        'Bezpłatna konsultacja',
+      'con.h2':          'Zanim zainwestujesz w rozwiązanie, porozmawiajmy o problemie.',
+      'con.p':           '30 minut rozmowy, żeby ocenić czy masz problem procesowy, produktowy czy AI. Bez zobowiązań.',
+      'con.placeholder': 'twoj@email.com',
+      'con.btn':         'Wyślij →',
+      'ftr.services':   'Usługi',
+      'ftr.approach':   'Jak pracuję',
+      'ftr.about':      'O mnie',
+      'form.sending': 'Wysyłanie…',
+      'form.ok':      '✓ Dziękuję! Odezwę się wkrótce.',
+      'form.err':     '✗ Coś poszło nie tak. Spróbuj ponownie.',
+      'form.net':     '✗ Brak połączenia. Spróbuj ponownie.',
+    },
+    en: {
+      'nav.services':     'Services',
+      'nav.approach':     'How I work',
+      'nav.about':        'About',
+      'nav.testimonials': 'Testimonials',
+      'nav.cta':          "Let's talk",
+      'hero.chip':   'Product Management · Operational Discovery · AI',
+      'hero.h1':     'Before building a product,<br>understand the <strong>problem</strong>.',
+      'hero.sub':    'I help organizations identify real operational and product challenges before investing in software, automation or AI.',
+      'hero.cta':    'Book a Consultation',
+      'hero.how':    'See How I Work',
+      'hero.stat1':  'years in product management',
+      'hero.stat2':  'people managed',
+      'hero.stat3':  'Scrum.org certification',
+      'prb.chip':  'The Reality',
+      'prb.h2':    'Why so many initiatives fail',
+      'prb.sub':   'The most common issue is not bad technology, but reaching for technology too soon.',
+      'prb.c1.title': 'Software without adoption',
+      'prb.c1.text':  'The organization implements new software, but employees continue working around it. The technical implementation is successful, adoption is not. Money has been spent. The problem remains.',
+      'prb.c2.title': 'Automation without definition',
+      'prb.c2.text':  'The team automates a process that was never clearly defined. The result: producing wrong outcomes faster. Technology does not fix unclear processes, it amplifies their consequences.',
+      'prb.c3.title': 'AI without need',
+      'prb.c3.text':  'The company introduces AI because AI is trendy, not because it understood whether AI solves its actual problem. The initiative consumes resources and does not change business outcomes.',
+      'prb.closing': 'The issue is rarely technology itself. It is usually <strong>poor definition of the problem</strong> the organization is trying to solve.',
+      'svc.chip': 'Services',
+      'svc.h2':   'Three ways I can help.',
+      'svc.sub':  'Every engagement starts with understanding the problem, not proposing a solution.',
+      's1.title': 'Operational & Product Discovery',
+      's1.desc':  'I analyse operational workflows and product challenges to uncover root causes before your organization invests in a solution.',
+      's1.deliverables': 'Process analysis · Bottleneck identification · Opportunity assessment · Strategic recommendations',
+      's2.title': 'AI & Automation Readiness',
+      's2.desc':  'I evaluate whether automation or AI will create real business value, or simply add complexity to existing process problems.',
+      's2.deliverables': 'Process maturity · Data quality · Adoption risk · Expected business impact',
+      's3.title': 'Fractional Product Leadership',
+      's3.desc':  'I support organizations in making product and operational decisions that drive measurable business outcomes, without hiring a full-time PM.',
+      's3.deliverables': 'Product prioritisation · Build/buy/automate decisions · Adoption strategy · Value-driven roadmap',
+      'app.chip': 'How I work',
+      'app.h2':   'Understand first. Build second.',
+      'app.sub':  'Technology is one possible outcome, not the starting point.',
+      'a1.num':   '01 · Understand',
+      'a1.title': 'How work actually happens',
+      'a1.desc':  'Before proposing anything, I spend time understanding how the organization actually works, not how it should work according to documentation, but how people actually do their jobs.',
+      'a2.num':   '02 · Analyse',
+      'a2.title': 'Where value is lost',
+      'a2.desc':  'I identify bottlenecks, redundant steps and places where time and resources are wasted. I look at data and talk to people, not just managers.',
+      'a3.num':   '03 · Diagnose',
+      'a3.title': 'What solution you actually need',
+      'a3.desc':  'Only after understanding the problem do I assess whether you need process change, product development, automation, or AI. Technology is one possible outcome, not the starting point.',
+      'a4.num':   '04 · Implement',
+      'a4.title': 'Adoption and measurable impact',
+      'a4.desc':  'A solution that is not adopted has no value. I ensure that changes are implemented, embraced by people and measurable.',
+      'exp.chip': 'Background',
+      'exp.h2':   '5+ years at the intersection of<br>operations, product and technology.',
+      'e1.date':  '2025 – present',
+      'e1.loc':   'Hybrid / Remote<br>Full-time',
+      'e1.title': 'Technical Product Manager',
+      'e1.sector':'◆ Global SaaS · Video Intelligence & AI',
+      'e1.desc':  'Value-driven discovery: assessing which AI insights deliver measurable business outcomes vs. operational noise. Defining scenarios (safety, compliance, labour) from the perspective of the business problem, not technological capability. Working with ML, CV and UX on model operationalisation in production.',
+      'e2.loc':   '3 yrs 4 mos · Full-time',
+      'e2.title': 'Director of Video Services & Loss Prevention',
+      'e2.sector':'◆ Global SaaS · Video Intelligence & Retail Analytics',
+      'e2.desc':  'Full product lifecycle from customer discovery to launch, with emphasis on adoption and measurable outcomes. Managing a 70-person operational team: process design, bottleneck elimination, continuous improvement culture. Agile adoption cutting time-to-market.',
+      'e3.loc':   '5 yrs · Full-time',
+      'e3.title': 'Operational & Analytical Leadership',
+      'e3.sector':'◆ Enterprise Operations & Process Management',
+      'e3.desc':  'The foundation of perspective: operational process analysis and optimisation, quality management, data work and enterprise customer support. Where the belief was formed that operational problems rarely require new software, they usually require a better understanding of the process.',
+      'abt.chip':        'About',
+      'abt.h2':          'A PM who starts with the process,<br>not the product.',
+      'abt.p1':          "Over the years I have worked at the intersection of operations, product management and technology. This combination shaped a simple belief: most organizations do not suffer from a lack of software. They suffer from a lack of clarity about the problems they are trying to solve.",
+      'abt.p2':          "I have led large operational teams, built AI and Computer Vision products, conducted deep customer discovery and driven process change in enterprise environments. This breadth of experience gives me a perspective that a typical roadmap-focused Product Manager simply does not have.",
+      'abt.badge_years': '8 yrs',
+      'abt.badge_label': 'PM & Operations',
+      'abt.cta':         "Let's work together",
+      'art.chip':  'Featured Article',
+      'art.h2':    'A perspective on product management',
+      'art.label': 'Coming soon',
+      'art.title': 'How to Tell Whether You Have a Process Problem or a Product Problem',
+      'art.desc':  'Why organizations jump to solutions too quickly, and how to make the right decision between process redesign, product development or AI.',
+      'art.cta':   'Coming soon →',
+      'art.t1':    'Why organizations jump to solutions too quickly',
+      'art.t2':    'Automation amplifies bad processes, it does not fix them',
+      'art.t3':    'Adoption ≠ technical implementation',
+      'art.t4':    'How to decide: process change, product or AI?',
+      'art.t5':    'The connection between discovery and operational analysis',
+      'tst.chip': 'Testimonial',
+      'tst.h2':   'What people say about working together.',
+      'con.chip':        'Free consultation',
+      'con.h2':          "Before investing in a solution, let's talk about the problem.",
+      'con.p':           "30 minutes to assess whether you have a process problem, a product problem or an AI challenge. No commitment required.",
+      'con.placeholder': 'your@email.com',
+      'con.btn':         'Send →',
+      'ftr.services':   'Services',
+      'ftr.approach':   'How I work',
+      'ftr.about':      'About',
+      'form.sending': 'Sending…',
+      'form.ok':      "✓ Thank you! I'll get back to you soon.",
+      'form.err':     '✗ Something went wrong. Please try again.',
+      'form.net':     '✗ No connection. Please try again.',
+    }
+  };
+
+  /* ══ LANGUAGE ══ */
+  let currentLang = localStorage.getItem('lang') || 'pl';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === lang)
+    );
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = T[lang][el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = T[lang][el.dataset.i18nHtml];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const val = T[lang][el.dataset.i18nPlaceholder];
+      if (val !== undefined) el.placeholder = val;
+    });
+  }
+
+  setLanguage(currentLang);
+
+  /* ══ NAV ELEVATION ══ */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('elevated', scrollY > 10), {passive:true});
+
+  /* ══ SCROLL-REVEAL ══ */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ══ FORM — FORMSPREE ══ */
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn  = form.querySelector('button[type="submit"]');
+    const msg  = document.getElementById('formMsg');
+    const l    = currentLang;
+    btn.textContent = T[l]['form.sending'];
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/xvzyavao', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        msg.textContent = T[l]['form.ok'];
+        msg.style.color = 'var(--primary-container)';
+        form.reset();
+      } else {
+        msg.textContent = T[l]['form.err'];
+        msg.style.color = '#ffb4ab';
+      }
+    } catch {
+      msg.textContent = T[l]['form.net'];
+      msg.style.color = '#ffb4ab';
+    }
+    msg.style.display = 'block';
+    btn.textContent = T[l]['con.btn'];
+    btn.disabled = false;
+    setTimeout(() => msg.style.display = 'none', 6000);
+  });
+
+  /* ══ ACTIVE NAV ══ */
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  document.querySelectorAll('section[id]').forEach(s => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting) navLinks.forEach(l => {
+          const active = l.getAttribute('href') === '#' + s.id;
+          l.style.color      = active ? 'var(--primary)' : '';
+          l.style.background = active ? 'var(--state-hover-primary)' : '';
+        });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'}).observe(s);
+  });
+</script>
+</body>
+</html>

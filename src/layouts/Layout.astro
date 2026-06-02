@@ -1,0 +1,236 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Michał Kuś | Product Management',
+  description = 'Product Manager specialising in operational discovery and problem-first thinking.',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='4' cy='7' r='2.5' fill='%235C948B' opacity='.45'/><circle cx='4' cy='16' r='2.5' fill='%235C948B'/><circle cx='4' cy='25' r='2.5' fill='%235C948B' opacity='.45'/><path d='M6.5 7 Q18 7 24 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='.45'/><path d='M6.5 16 L22 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round'/><path d='M6.5 25 Q18 25 24 16' stroke='%235C948B' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='.45'/><circle cx='26' cy='16' r='3.5' fill='%235C948B'/><path d='M24.5 14.8 L26 16 L24.5 17.2' stroke='white' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D5FL9NFBFS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D5FL9NFBFS');
+  </script>
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:               #5C948B;
+      --on-primary:            #ffffff;
+      --primary-container:     #BEDDB5;
+      --on-primary-container:  #1a3b34;
+      --secondary:             #7AB373;
+      --secondary-container:   #d4eecf;
+      --on-secondary-container:#0e3613;
+      --background:            #f1f6f0;
+      --on-background:         #191d18;
+      --surface:               #f8faf7;
+      --on-surface:            #191d18;
+      --surface-variant:       #dce9da;
+      --on-surface-variant:    #404940;
+      --surface-container:     #edf4eb;
+      --surface-container-high:#e7f0e5;
+      --surface-container-top: #e1ece0;
+      --outline:               #717970;
+      --outline-variant:       #c0ccbe;
+      --state-hover-primary:   rgba(92,148,139,.08);
+      --state-hover-surface:   rgba(25,29,24,.06);
+      --shape-sm:   8px;
+      --shape-md:   12px;
+      --shape-lg:   16px;
+      --shape-xl:   28px;
+      --shape-full: 999px;
+      --elev-1: 0 1px 2px rgba(0,0,0,.08), 0 1px 6px rgba(0,0,0,.05);
+      --elev-2: 0 2px 6px rgba(0,0,0,.10), 0 2px 12px rgba(0,0,0,.07);
+      --elev-3: 0 4px 12px rgba(0,0,0,.10), 0 4px 24px rgba(0,0,0,.07);
+      --max:  1100px;
+      --mono: "Roboto Mono", "SF Mono", monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Roboto", -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--on-background);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.2; letter-spacing: -.02em; color: var(--on-surface); }
+    h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 400; line-height: 1.3; color: var(--on-surface); }
+    h3 { font-size: 1.05rem; font-weight: 500; color: var(--on-surface); }
+    p  { color: var(--on-surface-variant); line-height: 1.7; }
+    a  { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    .chip {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono); font-size: .68rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid var(--primary); color: var(--primary);
+      padding: .28rem .85rem; border-radius: var(--shape-full);
+      margin-bottom: 1rem;
+    }
+    .chip-tonal { background: var(--primary-container); color: var(--on-primary-container); border-color: transparent; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      height: 40px; padding: 0 24px; border-radius: var(--shape-full);
+      font-family: "Roboto", sans-serif; font-size: .875rem; font-weight: 500;
+      cursor: pointer; border: none; transition: box-shadow .18s, opacity .15s;
+    }
+    .btn-filled  { background: var(--primary); color: var(--on-primary); box-shadow: var(--elev-1); }
+    .btn-filled:hover { box-shadow: var(--elev-2); }
+    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+    .btn-outlined:hover { background: var(--state-hover-primary); }
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      height: 64px; display:flex; align-items:center;
+      background: var(--surface); transition: box-shadow .25s, background .25s;
+    }
+    nav.elevated { box-shadow: var(--elev-2); background: var(--surface-container); }
+    .nav-inner {
+      max-width: var(--max); margin:0 auto; padding:0 1.5rem;
+      display:flex; align-items:center; justify-content:space-between; width:100%;
+    }
+    .logo { display:flex; align-items:center; gap:.55rem; font-size:.9rem; font-weight:500; color:var(--on-surface); }
+    .logo-dot { color: var(--primary); }
+    .lang-switcher {
+      display:flex; align-items:center; background:var(--surface-container);
+      border:1px solid var(--outline-variant); border-radius:var(--shape-full);
+      padding:.18rem .25rem; margin-left:.75rem; gap:.05rem;
+    }
+    .lang-btn {
+      background:none; border:none; cursor:pointer;
+      font-family:var(--mono); font-size:.72rem; font-weight:500;
+      letter-spacing:.06em; color:var(--on-surface-variant);
+      padding:.22rem .55rem; border-radius:var(--shape-full);
+      transition:background .15s, color .15s;
+    }
+    .lang-btn.active { background:var(--primary); color:var(--on-primary); }
+    .lang-btn:hover:not(.active) { background:var(--state-hover-primary); color:var(--on-surface); }
+    .nav-links { display:flex; gap:.2rem; list-style:none; align-items:center; }
+    .nav-link {
+      font-size:.875rem; color:var(--on-surface-variant);
+      padding:.45rem .95rem; border-radius:var(--shape-full);
+      transition:background .18s, color .18s;
+    }
+    .nav-link:hover { background:var(--state-hover-primary); color:var(--on-surface); }
+    .nav-cta {
+      background:var(--primary); color:var(--on-primary) !important; font-weight:500;
+      margin-left:.4rem; box-shadow:var(--elev-1);
+    }
+    .nav-cta:hover { box-shadow:var(--elev-2); opacity:.9; background:var(--primary) !important; }
+    /* FOOTER */
+    footer {
+      background:var(--surface-container-top);
+      border-top:1px solid var(--outline-variant); padding:1.85rem 0;
+    }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    .footer-links { display:flex; gap:1.4rem; list-style:none; }
+    .footer-links a { font-size:.82rem; color:var(--on-surface-variant); transition:color .18s; }
+    .footer-links a:hover { color:var(--primary); }
+    .footer-copy { font-size:.76rem; color:var(--outline); }
+    @media(max-width:768px){ .nav-links{display:none} }
+  </style>
+  <slot name="head" />
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <svg width="34" height="24" viewBox="0 0 36 26" fill="none">
+        <circle cx="4"  cy="5"  r="2.3" fill="#5C948B" opacity=".4"/>
+        <circle cx="4"  cy="13" r="2.3" fill="#5C948B"/>
+        <circle cx="4"  cy="21" r="2.3" fill="#5C948B" opacity=".4"/>
+        <path d="M6.3 5  Q18 5  25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <path d="M6.3 13 L23.5 13"       stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M6.3 21 Q18 21 25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <circle cx="28" cy="13" r="3.2" fill="#5C948B"/>
+        <path d="M26.2 11.8 L28 13 L26.2 14.2" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Michał Kuś<span class="logo-dot">.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#services"     class="nav-link" data-i18n="nav.services">Usługi</a></li>
+      <li><a href="/#approach"     class="nav-link" data-i18n="nav.approach">Jak pracuję</a></li>
+      <li><a href="/#about"        class="nav-link" data-i18n="nav.about">O mnie</a></li>
+      <li><a href="/#testimonials" class="nav-link" data-i18n="nav.testimonials">Rekomendacje</a></li>
+      <li><a href="/#contact"      class="nav-link nav-cta" data-i18n="nav.cta">Porozmawiajmy</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pl" onclick="setLanguage('pl')">PL</button>
+      <button class="lang-btn"        data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<slot />
+
+<footer>
+  <div class="container footer-inner">
+    <a href="/" class="logo">
+      <svg width="28" height="20" viewBox="0 0 36 26" fill="none">
+        <circle cx="4"  cy="5"  r="2.3" fill="#5C948B" opacity=".4"/>
+        <circle cx="4"  cy="13" r="2.3" fill="#5C948B"/>
+        <circle cx="4"  cy="21" r="2.3" fill="#5C948B" opacity=".4"/>
+        <path d="M6.3 5  Q18 5  25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <path d="M6.3 13 L23.5 13"       stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M6.3 21 Q18 21 25.5 13" stroke="#5C948B" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+        <circle cx="28" cy="13" r="3.2" fill="#5C948B"/>
+      </svg>
+      Michał Kuś<span class="logo-dot">.</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="/#services"   data-i18n="ftr.services">Usługi</a></li>
+      <li><a href="/#approach"   data-i18n="ftr.approach">Jak pracuję</a></li>
+      <li><a href="/#about"      data-i18n="ftr.about">O mnie</a></li>
+      <li><a href="/blog"        data-i18n="ftr.blog">Blog</a></li>
+      <li><a href="https://www.linkedin.com/in/michaelkus/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Michał Kuś · Gliwice, Śląskie</span>
+  </div>
+</footer>
+
+<script>
+  const T = {
+    pl: {
+      'nav.services': 'Usługi', 'nav.approach': 'Jak pracuję', 'nav.about': 'O mnie',
+      'nav.testimonials': 'Rekomendacje', 'nav.cta': 'Porozmawiajmy',
+      'ftr.services': 'Usługi', 'ftr.approach': 'Jak pracuję', 'ftr.about': 'O mnie', 'ftr.blog': 'Blog',
+    },
+    en: {
+      'nav.services': 'Services', 'nav.approach': 'How I work', 'nav.about': 'About',
+      'nav.testimonials': 'Testimonials', 'nav.cta': "Let's talk",
+      'ftr.services': 'Services', 'ftr.approach': 'How I work', 'ftr.about': 'About', 'ftr.blog': 'Blog',
+    }
+  };
+  let currentLang = localStorage.getItem('lang') || 'pl';
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = T[lang][el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+  }
+  setLanguage(currentLang);
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('elevated', scrollY > 10), {passive:true});
+</script>
+</body>
+</html>

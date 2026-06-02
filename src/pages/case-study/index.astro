@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const studies = (await getCollection('case-study'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Case Study | Michał Kuś" description="Konkretne przykłady tego, jak discovery operacyjne i analiza problemu poprzedzają decyzję o budowaniu produktu.">
+  <style>
+    .cs-hero {
+      padding: 8rem 0 4rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .cs-hero h1 { margin-bottom: .6rem; }
+    .cs-hero p { font-size: 1rem; max-width: 520px; }
+    .cs-section { padding: 4rem 0 6rem; background: var(--background); }
+    .cs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem;
+    }
+    .cs-card {
+      background: var(--surface-container);
+      border-radius: var(--shape-xl);
+      padding: 1.75rem;
+      transition: box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      border-top: 3px solid var(--primary);
+    }
+    .cs-card:hover { box-shadow: var(--elev-2); }
+    .cs-meta {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .cs-industry {
+      font-family: var(--mono);
+      font-size: .65rem;
+      letter-spacing: .06em;
+      color: var(--primary);
+      background: var(--primary-container);
+      padding: .2rem .6rem;
+      border-radius: var(--shape-full);
+    }
+    .cs-date {
+      font-family: var(--mono);
+      font-size: .65rem;
+      color: var(--on-surface-variant);
+      letter-spacing: .04em;
+    }
+    .cs-card h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      margin-bottom: .5rem;
+      line-height: 1.4;
+    }
+    .cs-card p { font-size: .875rem; flex: 1; margin-bottom: 1.25rem; }
+    .cs-link {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .cs-link:hover { text-decoration: underline; }
+    .empty-state { text-align: center; padding: 4rem 0; }
+    .empty-state h2 { font-size: 1.2rem; margin-bottom: .5rem; color: var(--on-surface); }
+  </style>
+
+  <section class="cs-hero">
+    <div class="container">
+      <div class="chip chip-tonal">Case Study</div>
+      <h1>Od problemu do wyniku.</h1>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="container">
+      {studies.length === 0 ? (
+        <div class="empty-state">
+          <h2>Case study w przygotowaniu.</h2>
+          <p>Wróć wkrótce — pierwsze case study będą dostępne niebawem.</p>
+        </div>
+      ) : (
+        <div class="cs-grid">
+          {studies.map(study => (
+            <a href={`/case-study/${study.slug}`} class="cs-card">
+              <div class="cs-meta">
+                {study.data.industry && <span class="cs-industry">{study.data.industry}</span>}
+                <span class="cs-date">
+                  {study.data.date.toLocaleDateString('pl-PL', { year: 'numeric', month: 'long' })}
+                </span>
+              </div>
+              <h2>{study.data.title}</h2>
+              <p>{study.data.description}</p>
+              <span class="cs-link">Czytaj case study →</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

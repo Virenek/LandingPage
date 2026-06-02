@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Blog | Michał Kuś" description="Myśli o product managemencie, discovery operacyjnym i tym, kiedy technologia naprawdę pomaga.">
+  <style>
+    .blog-hero {
+      padding: 8rem 0 4rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .blog-hero h1 { margin-bottom: .6rem; }
+    .blog-hero p { font-size: 1rem; max-width: 520px; }
+    .posts-section { padding: 4rem 0 6rem; background: var(--background); }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+    .post-card {
+      background: var(--surface-container);
+      border-radius: var(--shape-xl);
+      padding: 1.75rem;
+      transition: box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover { box-shadow: var(--elev-2); }
+    .post-date {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--on-surface-variant);
+      letter-spacing: .06em;
+      margin-bottom: .75rem;
+    }
+    .post-card h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      margin-bottom: .5rem;
+      line-height: 1.4;
+    }
+    .post-card p {
+      font-size: .875rem;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .post-link {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .post-link:hover { text-decoration: underline; }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--on-surface-variant);
+    }
+    .empty-state h2 { font-size: 1.2rem; margin-bottom: .5rem; color: var(--on-surface); }
+  </style>
+
+  <section class="blog-hero">
+    <div class="container">
+      <div class="chip chip-tonal">Blog</div>
+      <h1>Myśli o product managemencie.</h1>
+    </div>
+  </section>
+
+  <section class="posts-section">
+    <div class="container">
+      {posts.length === 0 ? (
+        <div class="empty-state">
+          <h2>Pierwsze wpisy wkrótce.</h2>
+          <p>Wróć za chwilę — pracuję nad pierwszymi artykułami.</p>
+        </div>
+      ) : (
+        <div class="posts-grid">
+          {posts.map(post => (
+            <a href={`/blog/${post.slug}`} class="post-card">
+              <div class="post-date">
+                {post.data.date.toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <span class="post-link">Czytaj →</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
